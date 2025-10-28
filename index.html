@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Prompt Engineering - Rocket Partners</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            min-height: calc(100vh - 200px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            z-index: 1;
+        }
+        .logo-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
+        }
+        .glow {
+            box-shadow: 0 0 30px rgba(12, 166, 236, 0.3),
+                        0 0 60px rgba(12, 166, 236, 0.15);
+        }
+        .card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transform-origin: center;
+        }
+        .card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+        .btn {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 12px 25px rgba(12, 166, 236, 0.3);
+        }
+        .btn:active:not(:disabled) {
+            transform: translateY(-1px) scale(1.01);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #0ca6ec 0%, #0891d1 50%, #0670a3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .progress-bar {
+            transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .dot.active {
+            width: 32px;
+            background: linear-gradient(135deg, #0ca6ec, #0891d1);
+            border-radius: 4px;
+            box-shadow: 0 3px 8px rgba(12, 166, 236, 0.4);
+        }
+        .text-shadow {
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+        }
+        .pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { 
+                opacity: 1; 
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 0.85; 
+                transform: scale(1.05);
+            }
+        }
+        .shine {
+            position: relative;
+            overflow: hidden;
+        }
+        .shine::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.3) 50%,
+                transparent 70%
+            );
+            animation: shine 3s infinite;
+        }
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        .slides-container {
+            position: relative;
+            min-height: calc(100vh - 200px);
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- Progress Bar -->
+        <div class="w-full h-2 bg-slate-200">
+            <div class="progress-bar h-full bg-gradient-to-r from-[#0ca6ec] to-[#0891d1]" 
+                 :style="{width: (currentSlide + 1) * (100 / slides.length) + '%'}">
+            </div>
+        </div>
+
+        <!-- Slides Container -->
+        <div class="slides-container p-8">
+            
+            <!-- Slide 0: Company Logo -->
+            <div :class="['slide', 'flex', 'flex-col', 'items-center', 'justify-center', {active: currentSlide === 0}]">
+                <div class="logo-float mb-12">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-r from-[#0ca6ec] to-[#0891d1] rounded-3xl blur-3xl opacity-40"></div>
+                        <div class="relative bg-gradient-to-br from-[#0ca6ec] to-[#0891d1] rounded-3xl p-16 glow shine">
+                            <div class="text-white text-8xl font-black tracking-tight" style="line-height: 1;">
+                                RP
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h1 class="text-6xl font-black text-slate-900 mb-5 text-center text-shadow" style="letter-spacing: -0.02em;">
+                    Rocket Partners
+                </h1>
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-16 h-0.5 bg-gradient-to-r from-transparent via-[#0ca6ec] to-transparent"></div>
+                    <i class="fas fa-rocket text-[#0ca6ec] text-4xl pulse-slow"></i>
+                    <div class="w-16 h-0.5 bg-gradient-to-r from-transparent via-[#0ca6ec] to-transparent"></div>
+                </div>
+                <p class="text-2xl text-slate-600 font-medium">AI Training Session 2025</p>
+            </div>
+
+            <!-- Slide 1: Title -->
+            <div :class="['slide', 'flex', 'flex-col', 'items-center', 'justify-center', {active: currentSlide === 1}]">
+                <div class="text-center max-w-5xl mx-auto">
+                    <div class="mb-10">
+                        <i class="fas fa-brain gradient-text text-7xl pulse-slow"></i>
+                    </div>
+                    <h1 class="text-6xl font-black text-slate-900 mb-6 leading-tight text-shadow" style="letter-spacing: -0.03em;">
+                        AI Prompt Engineering
+                    </h1>
+                    <div class="w-24 h-1.5 bg-gradient-to-r from-[#0ca6ec] to-[#0891d1] mx-auto mb-8 rounded-full"></div>
+                    <p class="text-3xl text-slate-600 font-semibold leading-relaxed" style="letter-spacing: -0.01em;">
+                        Exploring the Future of Human–AI Interaction
+                    </p>
+                </div>
+            </div>
+
+            <!-- Slide 2: Evolution -->
+            <div :class="['slide', 'flex', 'flex-col', 'justify-center', {active: currentSlide === 2}]">
+                <div class="max-w-5xl mx-auto w-full">
+                    <h2 class="text-5xl font-black text-slate-900 mb-2 text-shadow" style="letter-spacing: -0.03em;">
+                        From Commands to Conversations
+                    </h2>
+                    <div class="w-20 h-1 bg-gradient-to-r from-[#0ca6ec] to-transparent mb-12 rounded-full"></div>
+                    <div class="space-y-5">
+                        <div class="card bg-white p-8 rounded-2xl shadow-xl border-l-6 border-[#0ca6ec] flex items-center space-x-6">
+                            <div class="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-2xl">
+                                <i class="fas fa-terminal text-[#0ca6ec] text-5xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-3xl font-bold text-slate-900 mb-2" style="letter-spacing: -0.02em;">Command-line Interfaces</h3>
+                                <p class="text-lg text-slate-600 font-medium">Text-based commands and scripts</p>
+                            </div>
+                        </div>
+                        <div class="card bg-white p-8 rounded-2xl shadow-xl border-l-6 border-purple-500 flex items-center space-x-6">
+                            <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-2xl">
+                                <i class="fas fa-desktop text-purple-500 text-5xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-3xl font-bold text-slate-900 mb-2" style="letter-spacing: -0.02em;">Graphical Interfaces</h3>
+                                <p class="text-lg text-slate-600 font-medium">Visual elements and mouse interactions</p>
+                            </div>
+                        </div>
+                        <div class="card bg-white p-8 rounded-2xl shadow-xl border-l-6 border-green-500 flex items-center space-x-6">
+                            <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-2xl">
+                                <i class="fas fa-comment-dots text-green-500 text-5xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-3xl font-bold text-slate-900 mb-2" style="letter-spacing: -0.02em;">Conversational AI</h3>
+                                <p class="text-lg text-slate-600 font-medium">Natural language understanding</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Analytics -->
+            <div :class="['slide', 'flex', 'flex-col', 'items-center', 'justify-center', {active: currentSlide === 3}]">
+                <div class="text-center max-w-5xl mx-auto">
+                    <h2 class="text-5xl font-black text-slate-900 mb-12 text-shadow" style="letter-spacing: -0.03em;">
+                        Predictive Analytics Foundation
+                    </h2>
+                    <div class="relative bg-white rounded-3xl p-16 shadow-2xl border-4 border-blue-100">
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-50 via-cyan-50 to-slate-50 rounded-3xl opacity-60"></div>
+                        <div class="relative">
+                            <div class="inline-block bg-gradient-to-br from-blue-100 to-cyan-100 p-10 rounded-full mb-8">
+                                <i class="fas fa-chart-line text-[#0ca6ec] text-7xl pulse-slow"></i>
+                            </div>
+                            <p class="text-3xl text-slate-800 font-bold leading-relaxed" style="letter-spacing: -0.01em;">
+                                Data-driven forecasting built the backbone for intelligent automation
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Breakthroughs -->
+            <div :class="['slide', 'flex', 'flex-col', 'justify-center', {active: currentSlide === 4}]">
+                <div class="max-w-5xl mx-auto w-full">
+                    <h2 class="text-5xl font-black text-slate-900 mb-2 text-shadow" style="letter-spacing: -0.03em;">
+                        Key Technological Breakthroughs
+                    </h2>
+                    <div class="w-20 h-1 bg-gradient-to-r from-[#0ca6ec] to-transparent mb-12 rounded-full"></div>
+                    <div class="space-y-5">
+                        <div class="card bg-gradient-to-br from-blue-50 via-cyan-50 to-white p-10 rounded-2xl shadow-xl border-2 border-blue-200">
+                            <div class="flex items-center space-x-6">
+                                <div class="bg-white p-8 rounded-2xl shadow-lg">
+                                    <i class="fas fa-brain text-blue-600 text-6xl"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="text-3xl font-black text-slate-900 mb-3" style="letter-spacing: -0.02em;">Machine Learning & Neural Networks</h3>
+                                    <p class="text-lg text-slate-700 font-semibold">Pattern recognition and adaptive systems</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card bg-gradient-to-br from-purple-50 via-pink-50 to-white p-10 rounded-2xl shadow-xl border-2 border-purple-200">
+                            <div class="flex items-center space-x-6">
+                                <div class="bg-white p-8 rounded-2xl shadow-lg">
+                                    <i class="fas fa-cubes text-purple-600 text-6xl"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="text-3xl font-black text-slate-900 mb-3" style="letter-spacing: -0.02em;">Transformer Architecture (2017)</h3>
+                                    <p class="text-lg text-slate-700 font-semibold">Revolutionary attention mechanisms</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card bg-gradient-to-br from-teal-50 via-emerald-50 to-white p-10 rounded-2xl shadow-xl border-2 border-teal-200">
+                            <div class="flex items-center space-x-6">
+                                <div class="bg-white p-8 rounded-2xl shadow-lg">
+                                    <i class="fas fa-cloud text-teal-600 text-6xl"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="text-3xl font-black text-slate-900 mb-3" style="letter-spacing: -0.02em;">Large-Scale Pre-training (2020)</h3>
+                                    <p class="text-lg text-slate-700 font-semibold">GPT-3 and the era of foundation models</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Prompt Engineering -->
+            <div :class="['slide', 'flex', 'flex-col', 'justify-center', {active: currentSlide === 5}]">
+                <div class="max-w-6xl mx-auto w-full">
+                    <h2 class="text-5xl font-black text-slate-900 mb-2 text-center text-shadow" style="letter-spacing: -0.03em;">
+                        What is Prompt Engineering?
+                    </h2>
+                    <div class="w-20 h-1 bg-gradient-to-r from-[#0ca6ec] to-transparent mx-auto mb-10 rounded-full"></div>
+                    <div class="bg-gradient-to-br from-slate-50 to-blue-50 p-12 rounded-3xl mb-8 shadow-xl border-2 border-slate-200">
+                        <p class="text-2xl text-slate-800 font-bold leading-relaxed text-center" style="letter-spacing: -0.01em;">
+                            The process of designing effective inputs to guide LLMs like ChatGPT or Claude
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-3 gap-6">
+                        <div class="card bg-white p-8 rounded-2xl shadow-xl text-center border-t-6 border-yellow-400">
+                            <div class="bg-gradient-to-br from-yellow-50 to-amber-50 w-24 h-24 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                                <i class="fas fa-lightbulb text-yellow-500 text-5xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-black text-slate-900 mb-3" style="letter-spacing: -0.02em;">Inspire Creativity</h3>
+                            <p class="text-base text-slate-600 font-semibold">Unlock imaginative responses</p>
+                        </div>
+                        <div class="card bg-white p-8 rounded-2xl shadow-xl text-center border-t-6 border-purple-400">
+                            <div class="bg-gradient-to-br from-purple-50 to-pink-50 w-24 h-24 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                                <i class="fas fa-magic text-purple-500 text-5xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-black text-slate-900 mb-3" style="letter-spacing: -0.02em;">Control Outputs</h3>
+                            <p class="text-base text-slate-600 font-semibold">Guide model behavior</p>
+                        </div>
+                        <div class="card bg-white p-8 rounded-2xl shadow-xl text-center border-t-6 border-green-400">
+                            <div class="bg-gradient-to-br from-green-50 to-emerald-50 w-24 h-24 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                                <i class="fas fa-bullseye text-green-500 text-5xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-black text-slate-900 mb-3" style="letter-spacing: -0.02em;">Achieve Precision</h3>
+                            <p class="text-base text-slate-600 font-semibold">Get accurate results</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6: Demo -->
+            <div :class="['slide', 'flex', 'flex-col', 'items-center', 'justify-center', {active: currentSlide === 6}]">
+                <div class="text-center max-w-5xl">
+                    <h2 class="text-6xl font-black gradient-text mb-12 text-shadow" style="letter-spacing: -0.03em;">
+                        Live Demo
+                    </h2>
+                    <div class="relative shine">
+                        <div class="absolute inset-0 bg-gradient-to-br from-[#0ca6ec] to-[#0670a3] rounded-3xl blur-2xl opacity-30"></div>
+                        <div class="relative bg-gradient-to-br from-[#0ca6ec] to-blue-600 p-20 rounded-3xl shadow-2xl">
+                            <div class="bg-white/10 backdrop-blur-sm p-8 rounded-full inline-block mb-8">
+                                <i class="fas fa-play-circle text-white text-7xl pulse-slow"></i>
+                            </div>
+                            <p class="text-3xl text-white font-bold leading-relaxed mb-12" style="letter-spacing: -0.01em;">
+                                Show how phrasing and structure can completely change AI responses
+                            </p>
+                            <button class="px-16 py-5 bg-white text-[#0ca6ec] rounded-full text-2xl font-black shadow-2xl hover:shadow-3xl transition-all transform hover:scale-105 relative overflow-hidden group">
+                                <span class="relative z-10 flex items-center space-x-3">
+                                    <i class="fas fa-rocket"></i>
+                                    <span>Start Demo</span>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: Privacy -->
+            <div :class="['slide', 'flex', 'flex-col', 'justify-center', {active: currentSlide === 7}]">
+                <div class="max-w-5xl mx-auto w-full">
+                    <h2 class="text-5xl font-black text-slate-900 mb-2 text-shadow" style="letter-spacing: -0.03em;">
+                        Data Privacy & Guidelines
+                    </h2>
+                    <div class="w-20 h-1 bg-gradient-to-r from-[#0ca6ec] to-transparent mb-12 rounded-full"></div>
+                    <div class="bg-gradient-to-br from-amber-50 via-orange-50 to-white p-12 rounded-3xl border-4 border-amber-200 shadow-2xl">
+                        <div class="flex items-center space-x-8 mb-10">
+                            <div class="bg-white p-10 rounded-2xl shadow-xl">
+                                <i class="fas fa-shield-alt text-amber-600 text-7xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-4xl font-black text-slate-900 mb-3" style="letter-spacing: -0.02em;">Important Guidelines</h3>
+                                <p class="text-xl text-slate-700 font-semibold">Follow these practices for safe AI usage</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-white p-6 rounded-2xl flex items-center space-x-6 shadow-lg">
+                                <i class="fas fa-times-circle text-red-500 text-4xl"></i>
+                                <p class="text-xl text-slate-800 font-bold" style="letter-spacing: -0.01em;">Never input confidential data</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-2xl flex items-center space-x-6 shadow-lg">
+                                <i class="fas fa-check-circle text-green-500 text-4xl"></i>
+                                <p class="text-xl text-slate-800 font-bold" style="letter-spacing: -0.01em;">Follow corporate AI usage policies</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-2xl flex items-center space-x-6 shadow-lg">
+                                <i class="fas fa-check-circle text-green-500 text-4xl"></i>
+                                <p class="text-xl text-slate-800 font-bold" style="letter-spacing: -0.01em;">Ensure ethical AI interactions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8: Activity -->
+            <div :class="['slide', 'flex', 'flex-col', 'items-center', 'justify-center', {active: currentSlide === 8}]">
+                <div class="max-w-6xl mx-auto text-center">
+                    <h2 class="text-6xl font-black gradient-text mb-12 text-shadow" style="letter-spacing: -0.03em;">
+                        Hands-On Exercise
+                    </h2>
+                    <div class="bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50 p-16 rounded-3xl shadow-2xl border-4 border-purple-200">
+                        <div class="bg-white p-10 rounded-full inline-block mb-10 shadow-xl">
+                            <i class="fas fa-hands-helping text-purple-600 text-7xl"></i>
+                        </div>
+                        <p class="text-3xl text-slate-800 font-bold leading-relaxed mb-12" style="letter-spacing: -0.01em;">
+                            Collaboratively refine prompts to minimize hallucinations and improve results
+                        </p>
+                        <div class="grid grid-cols-3 gap-8">
+                            <div class="bg-white p-8 rounded-2xl shadow-xl">
+                                <i class="fas fa-search text-purple-500 text-5xl mb-4"></i>
+                                <p class="text-2xl font-black text-slate-800" style="letter-spacing: -0.01em;">Spot Issues</p>
+                            </div>
+                            <div class="bg-white p-8 rounded-2xl shadow-xl">
+                                <i class="fas fa-edit text-blue-500 text-5xl mb-4"></i>
+                                <p class="text-2xl font-black text-slate-800" style="letter-spacing: -0.01em;">Refine Prompts</p>
+                            </div>
+                            <div class="bg-white p-8 rounded-2xl shadow-xl">
+                                <i class="fas fa-trophy text-yellow-500 text-5xl mb-4"></i>
+                                <p class="text-2xl font-black text-slate-800" style="letter-spacing: -0.01em;">Get Results</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9: Thank You -->
+            <div :class="['slide', 'flex', 'flex-col', 'items-center', 'justify-center', {active: currentSlide === 9}]">
+                <div class="text-center">
+                    <h1 class="text-7xl font-black gradient-text mb-10 text-shadow" style="letter-spacing: -0.03em;">
+                        Thank You!
+                    </h1>
+                    <p class="text-3xl text-slate-600 font-bold mb-12" style="letter-spacing: -0.01em;">
+                        Empowering creativity through Prompt Engineering
+                    </p>
+                    <div class="inline-block bg-gradient-to-br from-red-50 to-pink-50 p-10 rounded-full mb-12">
+                        <i class="fas fa-heart text-red-500 text-7xl pulse-slow"></i>
+                    </div>
+                    <div class="flex items-center justify-center space-x-5 text-xl text-slate-500">
+                        <i class="fas fa-rocket text-[#0ca6ec] text-4xl"></i>
+                        <span class="font-bold text-2xl">Rocket Partners © 2025</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Navigation -->
+        <div class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-xl border-t-2 border-slate-200 p-6 shadow-2xl">
+            <div class="max-w-7xl mx-auto flex items-center justify-between">
+                <button 
+                    @click="prevSlide" 
+                    :disabled="currentSlide === 0"
+                    class="btn px-10 py-4 bg-gradient-to-r from-[#0ca6ec] to-[#0891d1] text-white rounded-xl font-bold text-lg shadow-lg flex items-center space-x-3 relative z-10"
+                >
+                    <i class="fas fa-chevron-left text-xl"></i>
+                    <span>Previous</span>
+                </button>
+                
+                <div class="flex items-center space-x-3">
+                    <div v-for="n in slides.length" :key="n" 
+                         :class="['dot', {active: currentSlide === n-1}]">
+                    </div>
+                </div>
+                
+                <button 
+                    @click="nextSlide" 
+                    :disabled="currentSlide === slides.length - 1"
+                    class="btn px-10 py-4 bg-gradient-to-r from-[#0ca6ec] to-[#0891d1] text-white rounded-xl font-bold text-lg shadow-lg flex items-center space-x-3 relative z-10"
+                >
+                    <span>Next</span>
+                    <i class="fas fa-chevron-right text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+        
+        createApp({
+            data() {
+                return {
+                    currentSlide: 0,
+                    slides: Array(10).fill(null)
+                }
+            },
+            methods: {
+                nextSlide() {
+                    if (this.currentSlide < this.slides.length - 1) {
+                        this.currentSlide++;
+                    }
+                },
+                prevSlide() {
+                    if (this.currentSlide > 0) {
+                        this.currentSlide--;
+                    }
+                },
+                handleKeyPress(e) {
+                    if (e.key === 'ArrowRight' || e.key === ' ') {
+                        e.preventDefault();
+                        this.nextSlide();
+                    }
+                    if (e.key === 'ArrowLeft') {
+                        e.preventDefault();
+                        this.prevSlide();
+                    }
+                }
+            },
+            mounted() {
+                window.addEventListener('keydown', this.handleKeyPress);
+            },
+            beforeUnmount() {
+                window.removeEventListener('keydown', this.handleKeyPress);
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
