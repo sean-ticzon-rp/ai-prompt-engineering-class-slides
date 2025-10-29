@@ -42,15 +42,26 @@
             visibility: visible;
             z-index: 1;
         }
-        
-        /* Make content containers responsive */
         .slide > div {
             width: 100%;
             max-height: 100%;
             overflow-y: auto;
+            padding: 1rem 0;
         }
-        
-        /* Ensure images scale properly */
+        .slide > div::-webkit-scrollbar {
+            width: 8px;
+        }
+        .slide > div::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+        }
+        .slide > div::-webkit-scrollbar-thumb {
+            background: rgba(12, 166, 236, 0.5);
+            border-radius: 10px;
+        }
+        .slide > div::-webkit-scrollbar-thumb:hover {
+            background: rgba(12, 166, 236, 0.8);
+        }
         img {
             max-width: 100%;
             height: auto;
@@ -169,7 +180,6 @@
             overflow: hidden;
         }
         
-        /* Responsive Design */
         @media (max-width: 1536px) {
             .text-7xl { font-size: 4rem !important; }
             .text-6xl { font-size: 3.5rem !important; }
@@ -225,7 +235,6 @@
             .h-80 { height: 14rem !important; }
             .h-72 { height: 12rem !important; }
             .h-48 { height: 10rem !important; }
-            /* Make grids responsive */
             .grid-cols-5 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
             .grid-cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
         }
@@ -263,12 +272,10 @@
             .h-48 { height: 8rem !important; }
             .h-24 { height: 5rem !important; }
             .h-20 { height: 4rem !important; }
-            /* Stack grids on mobile */
             .grid-cols-5 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
             .grid-cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
             .grid-cols-3 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }
             .grid-cols-2 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }
-            /* Adjust spacing */
             .space-y-5 > * + * { margin-top: 0.875rem !important; }
             .space-y-4 > * + * { margin-top: 0.75rem !important; }
         }
@@ -301,14 +308,12 @@
 </head>
 <body>
     <div id="app">
-        <!-- Progress Bar -->
         <div class="w-full h-2 bg-slate-200">
             <div class="progress-bar h-full bg-gradient-to-r from-[#0ca6ec] to-[#0891d1]" 
                  :style="{width: (currentSlide + 1) * (100 / slides.length) + '%'}">
             </div>
         </div>
 
-        <!-- Slides Container -->
         <div class="slides-container p-8">
             
             <!-- Slide 0: Company Logo -->
@@ -318,7 +323,6 @@
                         <div class="relative">
                             <div class="absolute inset-0 bg-gradient-to-r from-[#0ca6ec] to-[#0891d1] rounded-3xl blur-3xl opacity-40"></div>
                             <div class="relative bg-gradient-to-br from-[#0ca6ec] to-[#0891d1] rounded-3xl p-16 glow shine flex items-center justify-center">
-                                <!-- Replace 'logo.png' with your actual logo filename -->
                                 <img src="rp.png" alt="Rocket Partners Logo" class="max-w-xs max-h-48 w-auto h-auto object-contain">
                             </div>
                         </div>
@@ -378,7 +382,6 @@
                     </p>
                     
                     <div class="space-y-4">
-                        <!-- Command Line Era -->
                         <div class="card bg-gradient-to-br from-slate-50 to-blue-50 p-5 rounded-2xl shadow-lg border-2 border-slate-200">
                             <div class="flex items-start space-x-5">
                                 <div class="bg-white p-4 rounded-xl shadow-md flex-shrink-0">
@@ -395,14 +398,11 @@
                                     </div>
                                 </div>
                                 <div class="flex-shrink-0">
-                                    <img src="cmd.jpg" 
-                                         alt="Command Line Interface" 
-                                         class="w-32 h-24 object-cover rounded-xl border-2 border-slate-300 shadow-md hover:border-[#0ca6ec] transition-all">
+                                    <img src="cmd.jpg" alt="Command Line Interface" class="w-32 h-24 object-cover rounded-xl border-2 border-slate-300 shadow-md hover:border-[#0ca6ec] transition-all">
                                 </div>
                             </div>
                         </div>
 
-                        <!-- GUI Revolution -->
                         <div class="card bg-gradient-to-br from-purple-50 to-pink-50 p-5 rounded-2xl shadow-lg border-2 border-purple-200">
                             <div class="flex items-start space-x-5">
                                 <div class="bg-white p-4 rounded-xl shadow-md flex-shrink-0">
@@ -433,14 +433,11 @@
                                     </div>
                                 </div>
                                 <div class="flex-shrink-0">
-                                    <img src="win95.png" 
-                                         alt="GUI Revolution Interface" 
-                                         class="w-32 h-24 object-cover rounded-xl border-2 border-purple-300 shadow-md hover:border-purple-500 transition-all">
+                                    <img src="win95.png" alt="GUI Revolution" class="w-32 h-24 object-cover rounded-xl border-2 border-purple-300 shadow-md hover:border-purple-500 transition-all">
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Natural Language Attempts -->
                         <div class="card bg-gradient-to-br from-green-50 to-emerald-50 p-5 rounded-2xl shadow-lg border-2 border-green-200">
                             <div class="flex items-start space-x-5">
                                 <div class="bg-white p-4 rounded-xl shadow-md flex-shrink-0">
@@ -467,12 +464,8 @@
                                     </div>
                                 </div>
                                 <div class="flex space-x-2 flex-shrink-0">
-                                    <img src="nla 2.png" 
-                                         alt="Early Chatbot Interface" 
-                                         class="w-28 h-20 object-cover rounded-xl border-2 border-green-300 shadow-md hover:border-green-500 transition-all">
-                                    <img src="nla1.jpeg" 
-                                         alt="Virtual Assistant Interface" 
-                                         class="w-28 h-20 object-cover rounded-xl border-2 border-emerald-300 shadow-md hover:border-emerald-500 transition-all">
+                                    <img src="nla 2.png" alt="Early Chatbot" class="w-28 h-20 object-cover rounded-xl border-2 border-green-300 shadow-md hover:border-green-500 transition-all">
+                                    <img src="nla1.jpeg" alt="Virtual Assistant" class="w-28 h-20 object-cover rounded-xl border-2 border-emerald-300 shadow-md hover:border-emerald-500 transition-all">
                                 </div>
                             </div>
                         </div>
@@ -480,14 +473,13 @@
                 </div>
             </div>
 
-            <!-- Slide 4: The Vision & Question -->
+            <!-- Slide 4: What We've Always Wanted -->
             <div :class="['slide', {active: currentSlide === 4}]">
                 <div class="max-w-5xl mx-auto text-center w-full">
                     <h2 class="text-5xl font-black text-slate-900 mb-12 text-shadow" style="letter-spacing: -0.03em;">
                         What We've Always Wanted
                     </h2>
                     
-                    <!-- Main Quote -->
                     <div class="relative mb-16">
                         <div class="absolute inset-0 bg-gradient-to-br from-[#0ca6ec]/20 to-blue-200/30 rounded-3xl blur-2xl"></div>
                         <div class="relative bg-gradient-to-br from-white to-blue-50 p-16 rounded-3xl shadow-2xl border-2 border-blue-100">
@@ -499,7 +491,6 @@
                         </div>
                     </div>
 
-                    <!-- The Question -->
                     <div class="bg-gradient-to-br from-slate-50 to-purple-50 p-12 rounded-3xl shadow-xl border-2 border-purple-200">
                         <h3 class="text-3xl font-black text-slate-900 mb-6 text-shadow" style="letter-spacing: -0.02em;">
                             The Question This Raises:
@@ -541,15 +532,11 @@
 
                         <div class="grid grid-cols-2 gap-6">
                             <div class="bg-white p-4 rounded-2xl shadow-lg overflow-hidden">
-                                <img src="lg 2.png" 
-                                     alt="Early Analytics Dashboard" 
-                                     class="w-full h-48 object-cover rounded-lg border-2 border-blue-200 hover:border-[#0ca6ec] transition-all">
+                                <img src="lg 2.png" alt="Analytics Dashboard" class="w-full h-48 object-cover rounded-lg border-2 border-blue-200 hover:border-[#0ca6ec] transition-all">
                                 <p class="text-xs font-semibold text-slate-500 text-center mt-3">Early Analytics Dashboards</p>
                             </div>
                             <div class="bg-white p-4 rounded-2xl shadow-lg overflow-hidden">
-                                <img src="tf.gif" 
-                                     alt="Data Visualization Graphs" 
-                                     class="w-full h-48 object-cover rounded-lg border-2 border-cyan-200 hover:border-[#0ca6ec] transition-all">
+                                <img src="tf.gif" alt="Data Visualization" class="w-full h-48 object-cover rounded-lg border-2 border-cyan-200 hover:border-[#0ca6ec] transition-all">
                                 <p class="text-xs font-semibold text-slate-500 text-center mt-3">Data Visualization Graphs</p>
                             </div>
                         </div>
@@ -584,42 +571,73 @@
 
             <!-- Slide 6: Breakthroughs -->
             <div :class="['slide', {active: currentSlide === 6}]">
-                <div class="max-w-5xl mx-auto w-full">
+                <div class="max-w-6xl mx-auto w-full">
                     <h2 class="text-5xl font-black text-slate-900 mb-2 text-shadow" style="letter-spacing: -0.03em;">
                         Key Technological Breakthroughs
                     </h2>
-                    <div class="w-20 h-1 bg-gradient-to-r from-[#0ca6ec] to-transparent mb-12 rounded-full"></div>
+                    <div class="w-20 h-1 bg-gradient-to-r from-[#0ca6ec] to-transparent mb-8 rounded-full"></div>
                     <div class="space-y-5">
-                        <div class="card bg-gradient-to-br from-blue-50 via-cyan-50 to-white p-10 rounded-2xl shadow-xl border-2 border-blue-200">
+                        <div class="card bg-gradient-to-br from-blue-50 via-cyan-50 to-white p-8 rounded-2xl shadow-xl border-2 border-blue-200">
                             <div class="flex items-center space-x-6">
-                                <div class="bg-white p-8 rounded-2xl shadow-lg">
-                                    <i class="fas fa-brain text-blue-600 text-6xl"></i>
+                                <div class="bg-white p-8 rounded-2xl shadow-lg flex-shrink-0">
+                                    <img src="neural.png" alt="Neural Networks" class="w-40 h-40 object-contain">
                                 </div>
                                 <div class="flex-1">
                                     <h3 class="text-3xl font-black text-slate-900 mb-3" style="letter-spacing: -0.02em;">Machine Learning & Neural Networks</h3>
-                                    <p class="text-lg text-slate-700 font-semibold">Pattern recognition and adaptive systems</p>
+                                    <p class="text-lg text-slate-700 font-semibold mb-2">Pattern learning automation</p>
+                                    <p class="text-base text-slate-600">Feature engineering requirement</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="card bg-gradient-to-br from-purple-50 via-pink-50 to-white p-10 rounded-2xl shadow-xl border-2 border-purple-200">
+
+                        <div class="card bg-gradient-to-br from-purple-50 via-pink-50 to-white p-8 rounded-2xl shadow-xl border-2 border-purple-200">
                             <div class="flex items-center space-x-6">
-                                <div class="bg-white p-8 rounded-2xl shadow-lg">
-                                    <i class="fas fa-cubes text-purple-600 text-6xl"></i>
+                                <div class="bg-white p-8 rounded-2xl shadow-lg flex-shrink-0">
+                                    <img src="transformer.png" alt="Transformer" class="w-40 h-40 object-contain">
                                 </div>
                                 <div class="flex-1">
                                     <h3 class="text-3xl font-black text-slate-900 mb-3" style="letter-spacing: -0.02em;">Transformer Architecture (2017)</h3>
-                                    <p class="text-lg text-slate-700 font-semibold">Revolutionary attention mechanisms</p>
+                                    <div class="grid grid-cols-3 gap-3">
+                                        <div class="bg-white/70 p-3 rounded-lg">
+                                            <p class="text-sm font-bold text-purple-700">Self-attention mechanism</p>
+                                        </div>
+                                        <div class="bg-white/70 p-3 rounded-lg">
+                                            <p class="text-sm font-bold text-purple-700">Context understanding</p>
+                                        </div>
+                                        <div class="bg-white/70 p-3 rounded-lg">
+                                            <p class="text-sm font-bold text-purple-700">Language structure processing</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="card bg-gradient-to-br from-teal-50 via-emerald-50 to-white p-10 rounded-2xl shadow-xl border-2 border-teal-200">
+
+                        <div class="card bg-gradient-to-br from-teal-50 via-emerald-50 to-white p-8 rounded-2xl shadow-xl border-2 border-teal-200">
                             <div class="flex items-center space-x-6">
-                                <div class="bg-white p-8 rounded-2xl shadow-lg">
-                                    <i class="fas fa-cloud text-teal-600 text-6xl"></i>
+                                <div class="bg-white p-8 rounded-2xl shadow-lg flex-shrink-0">
+                                    <img src="pretrained.png" alt="Pre-training" class="w-40 h-40 object-contain">
                                 </div>
                                 <div class="flex-1">
                                     <h3 class="text-3xl font-black text-slate-900 mb-3" style="letter-spacing: -0.02em;">Large-Scale Pre-training (2020)</h3>
-                                    <p class="text-lg text-slate-700 font-semibold">GPT-3 and the era of foundation models</p>
+                                    <p class="text-lg text-slate-700 font-semibold mb-2">GPT-3 and the era of foundation models</p>
+                                    <div class="flex gap-3">
+                                        <div class="bg-white/70 px-4 py-2 rounded-lg">
+                                            <p class="text-sm font-bold text-teal-700">Massive dataset training</p>
+                                        </div>
+                                        <div class="bg-white/70 px-4 py-2 rounded-lg">
+                                            <p class="text-sm font-bold text-teal-700">Few-shot learning emergence</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-amber-50 to-yellow-50 p-6 rounded-2xl border-l-4 border-amber-400 shadow-lg">
+                            <div class="flex items-center space-x-4">
+                                <i class="fas fa-lightbulb text-amber-500 text-4xl"></i>
+                                <div>
+                                    <p class="text-xl font-black text-slate-900 mb-1">Paradigm Shift</p>
+                                    <p class="text-lg text-slate-700 font-semibold">From <span class="text-amber-600">Feature Engineering</span> to <span class="text-amber-600">Input Engineering (Prompts)</span></p>
                                 </div>
                             </div>
                         </div>
@@ -627,8 +645,24 @@
                 </div>
             </div>
 
-            <!-- Slide 7: How LLMs Work -->
+            <!-- Slide 7: How LLMs Work Section -->
             <div :class="['slide', {active: currentSlide === 7}]">
+                <div class="text-center max-w-5xl mx-auto w-full">
+                    <div class="mb-10">
+                        <i class="fas fa-cogs gradient-text text-7xl pulse-slow"></i>
+                    </div>
+                    <h1 class="text-6xl font-black text-slate-900 mb-6 leading-tight text-shadow" style="letter-spacing: -0.03em;">
+                        How LLMs Work
+                    </h1>
+                    <div class="w-24 h-1.5 bg-gradient-to-r from-[#0ca6ec] to-[#0891d1] mx-auto mb-8 rounded-full"></div>
+                    <p class="text-3xl text-slate-600 font-semibold leading-relaxed" style="letter-spacing: -0.01em;">
+                        Understanding Large Language Models
+                    </p>
+                </div>
+            </div>
+
+            <!-- Slide 8: Inside LLM -->
+            <div :class="['slide', {active: currentSlide === 8}]">
                 <div class="max-w-7xl mx-auto w-full px-4">
                     <h2 class="text-5xl font-black text-slate-900 mb-3 text-shadow" style="letter-spacing: -0.03em;">
                         Inside the Large Language Model
@@ -639,15 +673,11 @@
 
                     <div class="grid grid-cols-2 gap-8 mb-6">
                         <div class="bg-white p-6 rounded-2xl shadow-xl border-2 border-blue-200">
-                            <img src="transformers.png" 
-                                 alt="Transformer Architecture Diagram" 
-                                 class="w-full h-80 object-contain rounded-xl border-2 border-blue-300 hover:border-[#0ca6ec] transition-all mb-4">
+                            <img src="transformers.png" alt="Transformer Architecture" class="w-full h-80 object-contain rounded-xl border-2 border-blue-300 hover:border-[#0ca6ec] transition-all mb-4">
                             <p class="text-base font-bold text-slate-600 text-center">Transformer Architecture & Attention Flow</p>
                         </div>
                         <div class="bg-white p-6 rounded-2xl shadow-xl border-2 border-purple-200">
-                            <img src="prediction.jpeg" 
-                                 alt="Next-Word Prediction Process" 
-                                 class="w-full h-80 object-contain rounded-xl border-2 border-purple-300 hover:border-purple-500 transition-all mb-4">
+                            <img src="prediction.jpeg" alt="Next-Word Prediction" class="w-full h-80 object-contain rounded-xl border-2 border-purple-300 hover:border-purple-500 transition-all mb-4">
                             <p class="text-base font-bold text-slate-600 text-center">Next-Word Prediction Process</p>
                         </div>
                     </div>
@@ -682,8 +712,8 @@
                 </div>
             </div>
 
-            <!-- Slide 8: How LLMs Understand Your Prompt -->
-            <div :class="['slide', {active: currentSlide === 8}]">
+            <!-- Slide 9: From Words to Meaning -->
+            <div :class="['slide', {active: currentSlide === 9}]">
                 <div class="max-w-6xl mx-auto w-full">
                     <h2 class="text-5xl font-black text-slate-900 mb-3 text-shadow" style="letter-spacing: -0.03em;">
                         From Words to Meaning
@@ -722,12 +752,9 @@
                             </div>
                         </div>
 
-                        <!-- Centered Tokenization Sample -->
                         <div class="flex justify-center">
                             <div class="bg-white p-8 rounded-2xl shadow-xl border-2 border-sky-300 max-w-3xl w-full">
-                                <img src="tokenization.png" 
-                                     alt="Tokenization Sample Output" 
-                                     class="w-full h-72 object-contain rounded-xl border-2 border-sky-400 hover:border-sky-600 transition-all mb-4">
+                                <img src="token.png" alt="Tokenization Sample" class="w-full h-72 object-contain rounded-xl border-2 border-sky-400 hover:border-sky-600 transition-all mb-4">
                                 <p class="text-lg font-bold text-slate-600 text-center">Tokenization Sample Output</p>
                             </div>
                         </div>
@@ -735,8 +762,8 @@
                 </div>
             </div>
 
-            <!-- Slide 9: Understanding the LLM Landscape -->
-            <div :class="['slide', {active: currentSlide === 9}]">
+            <!-- Slide 10: LLM Landscape -->
+            <div :class="['slide', {active: currentSlide === 10}]">
                 <div class="max-w-6xl mx-auto w-full">
                     <h2 class="text-5xl font-black text-slate-900 mb-3 text-shadow" style="letter-spacing: -0.03em;">
                         Comparing Popular LLMs
@@ -746,9 +773,7 @@
                     <div class="grid grid-cols-2 gap-5">
                         <div class="card bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-2xl shadow-xl border-2 border-green-200">
                             <div class="flex items-start space-x-4 mb-4">
-                                <img src="chatgpt.jpeg" 
-                                     alt="ChatGPT Logo" 
-                                     class="w-20 h-20 rounded-xl border-2 border-green-400 shadow-md object-cover">
+                                <img src="chatgpt.jpeg" alt="ChatGPT" class="w-20 h-20 rounded-xl border-2 border-green-400 shadow-md object-cover">
                                 <div>
                                     <h3 class="text-2xl font-black text-slate-900 mb-1">ChatGPT</h3>
                                     <p class="text-sm font-semibold text-green-700">OpenAI</p>
@@ -763,9 +788,7 @@
 
                         <div class="card bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-2xl shadow-xl border-2 border-blue-200">
                             <div class="flex items-start space-x-4 mb-4">
-                                <img src="claude.jpeg" 
-                                     alt="Claude Logo" 
-                                     class="w-20 h-20 rounded-xl border-2 border-blue-400 shadow-md object-cover">
+                                <img src="claude.jpeg" alt="Claude" class="w-20 h-20 rounded-xl border-2 border-blue-400 shadow-md object-cover">
                                 <div>
                                     <h3 class="text-2xl font-black text-slate-900 mb-1">Claude</h3>
                                     <p class="text-sm font-semibold text-blue-700">Anthropic</p>
@@ -780,9 +803,7 @@
 
                         <div class="card bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-2xl shadow-xl border-2 border-purple-200">
                             <div class="flex items-start space-x-4 mb-4">
-                                <img src="gamma.jpeg" 
-                                     alt="Gamma AI Logo" 
-                                     class="w-20 h-20 rounded-xl border-2 border-purple-400 shadow-md object-cover">
+                                <img src="gamma.jpeg" alt="Gamma AI" class="w-20 h-20 rounded-xl border-2 border-purple-400 shadow-md object-cover">
                                 <div>
                                     <h3 class="text-2xl font-black text-slate-900 mb-1">Gamma AI</h3>
                                     <p class="text-sm font-semibold text-purple-700">Presentation Tool</p>
@@ -797,9 +818,7 @@
 
                         <div class="card bg-gradient-to-br from-orange-50 to-amber-50 p-6 rounded-2xl shadow-xl border-2 border-orange-200">
                             <div class="flex items-start space-x-4 mb-4">
-                                <img src="popai.jpeg" 
-                                     alt="PopAI Logo" 
-                                     class="w-20 h-20 rounded-xl border-2 border-orange-400 shadow-md object-cover">
+                                <img src="popai.jpeg" alt="PopAI" class="w-20 h-20 rounded-xl border-2 border-orange-400 shadow-md object-cover">
                                 <div>
                                     <h3 class="text-2xl font-black text-slate-900 mb-1">PopAI</h3>
                                     <p class="text-sm font-semibold text-orange-700">Document Converter</p>
@@ -814,9 +833,7 @@
 
                         <div class="card bg-gradient-to-br from-slate-50 to-zinc-100 p-6 rounded-2xl shadow-xl border-2 border-slate-300 col-span-2">
                             <div class="flex items-start space-x-4 mb-4">
-                                <img src="palantir.jpeg" 
-                                     alt="Palantir AIP Logo" 
-                                     class="w-20 h-20 rounded-xl border-2 border-slate-400 shadow-md object-cover">
+                                <img src="palantir.jpeg" alt="Palantir AIP" class="w-20 h-20 rounded-xl border-2 border-slate-400 shadow-md object-cover">
                                 <div>
                                     <h3 class="text-2xl font-black text-slate-900 mb-1">Palantir AIP</h3>
                                     <p class="text-sm font-semibold text-slate-700">Enterprise Platform</p>
@@ -832,8 +849,8 @@
                 </div>
             </div>
 
-            <!-- Slide 10: Limitations of LLMs -->
-            <div :class="['slide', {active: currentSlide === 10}]">
+            <!-- Slide 11: Hallucinations -->
+            <div :class="['slide', {active: currentSlide === 11}]">
                 <div class="max-w-6xl mx-auto w-full">
                     <h2 class="text-5xl font-black text-slate-900 mb-3 text-shadow" style="letter-spacing: -0.03em;">
                         What Are Hallucinations?
@@ -843,7 +860,7 @@
                     </p>
 
                     <div class="bg-gradient-to-br from-red-50 via-orange-50 to-amber-50 p-10 rounded-3xl shadow-2xl border-4 border-red-200 mb-8">
-                        <div class="flex items-start space-x-6 mb-8">
+                        <div class="flex items-start space-x-6">
                             <div class="bg-white p-8 rounded-2xl shadow-xl">
                                 <i class="fas fa-exclamation-triangle text-red-500 text-7xl"></i>
                             </div>
@@ -852,21 +869,6 @@
                                 <p class="text-xl text-slate-700 font-semibold leading-relaxed">
                                     Training rewards confident answers over admitting uncertainty, leading models to "guess" instead of saying "I don't know."
                                 </p>
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-6">
-                            <div class="bg-white p-6 rounded-2xl shadow-lg">
-                                <img src="https://via.placeholder.com/450x200/fee2e2/ef4444?text=AI+Guess+vs+Uncertainty" 
-                                     alt="AI Guess vs AI Uncertainty" 
-                                     class="w-full h-48 object-cover rounded-xl border-2 border-red-300 hover:border-red-500 transition-all mb-3">
-                                <p class="text-sm font-bold text-slate-600 text-center">AI Guess vs AI Uncertainty</p>
-                            </div>
-                            <div class="bg-white p-6 rounded-2xl shadow-lg">
-                                <img src="https://via.placeholder.com/450x200/fed7aa/f97316?text=Confident+Incorrect+Response" 
-                                     alt="Confident but Incorrect Responses" 
-                                     class="w-full h-48 object-cover rounded-xl border-2 border-orange-300 hover:border-orange-500 transition-all mb-3">
-                                <p class="text-sm font-bold text-slate-600 text-center">Chart: Confident but Incorrect Responses</p>
                             </div>
                         </div>
                     </div>
@@ -891,8 +893,413 @@
                 </div>
             </div>
 
-            <!-- Slide 11: Demo -->
-            <div :class="['slide', {active: currentSlide === 11}]">
+            <!-- Slide 12: Prompt Engineering Section -->
+            <div :class="['slide', {active: currentSlide === 12}]">
+                <div class="text-center max-w-5xl mx-auto w-full">
+                    <div class="mb-10">
+                        <i class="fas fa-pen-fancy gradient-text text-7xl pulse-slow"></i>
+                    </div>
+                    <h1 class="text-6xl font-black text-slate-900 mb-6 leading-tight text-shadow" style="letter-spacing: -0.03em;">
+                        What is Prompt Engineering?
+                    </h1>
+                    <div class="w-24 h-1.5 bg-gradient-to-r from-[#0ca6ec] to-[#0891d1] mx-auto mb-8 rounded-full"></div>
+                    <p class="text-3xl text-slate-600 font-semibold leading-relaxed" style="letter-spacing: -0.01em;">
+                        Crafting Effective AI Instructions
+                    </p>
+                </div>
+            </div>
+
+            <!-- Slide 13: Definition & Why -->
+            <div :class="['slide', {active: currentSlide === 13}]">
+                <div class="max-w-6xl mx-auto w-full">
+                    <h2 class="text-5xl font-black text-slate-900 mb-3 text-shadow" style="letter-spacing: -0.03em;">
+                        Understanding Prompt Engineering
+                    </h2>
+                    <p class="text-xl text-slate-600 font-semibold mb-8">
+                        The process of carefully designing prompts to produce desired AI outputs
+                    </p>
+
+                    <div class="bg-gradient-to-br from-blue-50 to-cyan-50 p-10 rounded-3xl shadow-2xl border-2 border-blue-200 mb-6">
+                        <div class="flex items-start space-x-6 mb-6">
+                            <div class="bg-white p-8 rounded-2xl shadow-lg">
+                                <i class="fas fa-book-open text-blue-600 text-6xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-3xl font-black text-slate-900 mb-4" style="letter-spacing: -0.02em;">Definition</h3>
+                                <p class="text-lg text-slate-700 font-semibold leading-relaxed">
+                                    Prompt engineering is the process of carefully designing the prompts or instructions given to generative AI models to produce the desired outputs. Prompts act as guides that provide context and set expectations for the AI.
+                                </p>
+                                <p class="text-base text-slate-500 italic mt-3">— Amazon AWS</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-5">
+                        <div class="bg-gradient-to-br from-red-50 to-orange-50 p-6 rounded-2xl shadow-xl border-2 border-red-200">
+                            <i class="fas fa-shield-halved text-red-500 text-4xl mb-4"></i>
+                            <h3 class="text-xl font-black text-slate-900 mb-2">Prevent Hallucinations</h3>
+                            <p class="text-sm text-slate-700">Avoid overly simple or complex outputs</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-2xl shadow-xl border-2 border-green-200">
+                            <i class="fas fa-coins text-green-500 text-4xl mb-4"></i>
+                            <h3 class="text-xl font-black text-slate-900 mb-2">Save Resources</h3>
+                            <p class="text-sm text-slate-700">Cloud usage costs money with usage limits</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-2xl shadow-xl border-2 border-purple-200">
+                            <i class="fas fa-bullseye text-purple-500 text-4xl mb-4"></i>
+                            <h3 class="text-xl font-black text-slate-900 mb-2">Get Quality Results</h3>
+                            <p class="text-sm text-slate-700">High-quality, relevant AI outputs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 14: Where Useful -->
+            <div :class="['slide', {active: currentSlide === 14}]">
+                <div class="max-w-6xl mx-auto w-full">
+                    <h2 class="text-5xl font-black text-slate-900 mb-3 text-shadow" style="letter-spacing: -0.03em;">
+                        Where is Prompt Engineering Useful?
+                    </h2>
+                    <p class="text-xl text-slate-600 font-semibold mb-10">
+                        Practical applications in software development
+                    </p>
+
+                    <div class="space-y-5">
+                        <div class="card bg-gradient-to-br from-blue-50 to-cyan-50 p-8 rounded-2xl shadow-xl border-2 border-blue-200">
+                            <div class="flex items-center space-x-6">
+                                <div class="bg-white p-8 rounded-2xl shadow-lg">
+                                    <i class="fas fa-code text-blue-600 text-5xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-black text-slate-900 mb-2">Writing Code</h3>
+                                    <p class="text-lg text-slate-700">Generate code and tests that follow specific styles and patterns</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card bg-gradient-to-br from-purple-50 to-pink-50 p-8 rounded-2xl shadow-xl border-2 border-purple-200">
+                            <div class="flex items-center space-x-6">
+                                <div class="bg-white p-8 rounded-2xl shadow-lg">
+                                    <i class="fas fa-mobile-alt text-purple-600 text-5xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-black text-slate-900 mb-2">Designing Applications</h3>
+                                    <p class="text-lg text-slate-700">Create apps with specific instructions and constraints</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card bg-gradient-to-br from-green-50 to-emerald-50 p-8 rounded-2xl shadow-xl border-2 border-green-200">
+                            <div class="flex items-center space-x-6">
+                                <div class="bg-white p-8 rounded-2xl shadow-lg">
+                                    <i class="fas fa-file-alt text-green-600 text-5xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-black text-slate-900 mb-2">Documenting Code</h3>
+                                    <p class="text-lg text-slate-700">Generate PR comments and technical documentation</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 15: Level 1 -->
+            <div :class="['slide', {active: currentSlide === 15}]">
+                <div class="max-w-6xl mx-auto w-full">
+                    <div class="flex items-center space-x-4 mb-8">
+                        <div class="bg-red-500 text-white px-8 py-4 rounded-full font-black text-3xl shadow-xl">Level 1</div>
+                        <h2 class="text-6xl font-black text-slate-900 text-shadow" style="letter-spacing: -0.03em;">Not Even Trying</h2>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-red-50 to-orange-50 p-12 rounded-3xl shadow-2xl border-4 border-red-300 mb-10">
+                        <h3 class="text-3xl font-black text-slate-900 mb-6">The Problem</h3>
+                        <p class="text-2xl text-slate-700 font-semibold mb-8">Just the basic ask, no context</p>
+                        
+                        <div class="bg-white p-8 rounded-2xl shadow-xl border-l-4 border-red-500 mb-8">
+                            <p class="text-lg font-bold text-slate-500 mb-3">Example Prompt:</p>
+                            <p class="text-2xl text-slate-800 font-mono leading-relaxed">"Create an HTML page about how to raise a dog. Make it fun and informative."</p>
+                        </div>
+
+                        <div class="bg-amber-50 p-8 rounded-2xl border-l-4 border-amber-400">
+                            <p class="text-2xl font-bold text-slate-800 mb-2">
+                                <i class="fas fa-question-circle text-amber-500 mr-3"></i>
+                                What's Missing? <span class="text-xl font-normal italic">(Ask the audience)</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-10 rounded-2xl shadow-2xl border-l-4 border-red-500">
+                        <div class="flex items-center space-x-6 mb-4">
+                            <i class="fas fa-times-circle text-red-500 text-5xl"></i>
+                            <h3 class="text-3xl font-black text-slate-900">Result</h3>
+                        </div>
+                        <p class="text-2xl text-slate-700 font-semibold">Generic, unusable output</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 16: Level 2 -->
+            <div :class="['slide', {active: currentSlide === 16}]">
+                <div class="max-w-7xl mx-auto w-full">
+                    <div class="flex items-center space-x-4 mb-8">
+                        <div class="bg-orange-500 text-white px-8 py-4 rounded-full font-black text-3xl shadow-xl">Level 2</div>
+                        <h2 class="text-6xl font-black text-slate-900 text-shadow" style="letter-spacing: -0.03em;">Add Context - The 5 W's</h2>
+                    </div>
+
+                    <p class="text-2xl text-slate-600 font-semibold mb-8">Give Claude contextual information using the 5 W's framework</p>
+
+                    <div class="grid grid-cols-5 gap-5 mb-8">
+                        <div class="bg-gradient-to-br from-blue-50 to-cyan-50 p-7 rounded-2xl shadow-xl border-4 border-blue-300">
+                            <i class="fas fa-question text-blue-600 text-5xl mb-4"></i>
+                            <h3 class="text-2xl font-black text-slate-900 mb-2">What</h3>
+                            <p class="text-sm text-slate-700 mb-3 font-semibold">What do you need?</p>
+                            <ul class="text-xs text-slate-600 space-y-1">
+                                <li>• Output type</li>
+                                <li>• Attach files</li>
+                                <li>• Use artifacts</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-7 rounded-2xl shadow-xl border-4 border-purple-300">
+                            <i class="fas fa-users text-purple-600 text-5xl mb-4"></i>
+                            <h3 class="text-2xl font-black text-slate-900 mb-2">Who</h3>
+                            <p class="text-sm text-slate-700 mb-3 font-semibold">For whom & roles?</p>
+                            <ul class="text-xs text-slate-600 space-y-1">
+                                <li>• Audience</li>
+                                <li>• Your role</li>
+                                <li>• Claude's role</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-7 rounded-2xl shadow-xl border-4 border-green-300">
+                            <i class="fas fa-lightbulb text-green-600 text-5xl mb-4"></i>
+                            <h3 class="text-2xl font-black text-slate-900 mb-2">Why</h3>
+                            <p class="text-sm text-slate-700 mb-3 font-semibold">Why does it matter?</p>
+                            <ul class="text-xs text-slate-600 space-y-1">
+                                <li>• Problem</li>
+                                <li>• Success metrics</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gradient-to-br from-amber-50 to-orange-50 p-7 rounded-2xl shadow-xl border-4 border-amber-300">
+                            <i class="fas fa-location-dot text-amber-600 text-5xl mb-4"></i>
+                            <h3 class="text-2xl font-black text-slate-900 mb-2">Where</h3>
+                            <p class="text-sm text-slate-700 mb-3 font-semibold">Where will it be?</p>
+                            <ul class="text-xs text-slate-600 space-y-1">
+                                <li>• Platform</li>
+                                <li>• Stack/tech</li>
+                                <li>• Constraints</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gradient-to-br from-teal-50 to-cyan-50 p-7 rounded-2xl shadow-xl border-4 border-teal-300">
+                            <i class="fas fa-calendar-check text-teal-600 text-5xl mb-4"></i>
+                            <h3 class="text-2xl font-black text-slate-900 mb-2">When</h3>
+                            <p class="text-sm text-slate-700 mb-3 font-semibold">Current info needed?</p>
+                            <ul class="text-xs text-slate-600 space-y-1">
+                                <li>• Web Search</li>
+                                <li>• Research mode</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800 p-8 rounded-3xl shadow-2xl">
+                        <p class="text-lg font-bold text-green-400 mb-4">Example Prompt with 5 W's:</p>
+                        <pre class="text-sm text-green-400 font-mono overflow-x-auto leading-relaxed">"Create an HTML page about raising a dog for first-time dog owners.
+
+<span class="text-blue-400">What:</span>
+- Single-page HTML website about raising a dog
+- 5 main sections covering puppy basics
+- Attached as an artifact is my outline for the content proper
+
+<span class="text-purple-400">Who:</span>
+- This is a gift for my brother and his wife (my sister-in-law)
+- They're getting their first dog soon, a bichon frisé
+- They have close to no prior pet experience
+
+<span class="text-amber-400">Where:</span>
+- Will be hosted on GitHub Pages
+- Needs to be mobile-friendly
+
+<span class="text-green-400">Why:</span>
+- Help them feel prepared without overwhelming them
+- Give them practical, actionable advice
+- Make it approachable and supportive
+
+<span class="text-teal-400">When:</span>
+- Use current veterinary best practices
+- Consider Web Search for what food not to eat"</pre>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Slide 17: Level 3 -->
+            <div :class="['slide', {active: currentSlide === 17}]">
+                <div class="max-w-7xl mx-auto w-full">
+                    <div class="flex items-center space-x-4 mb-8">
+                        <div class="bg-yellow-500 text-white px-8 py-4 rounded-full font-black text-3xl shadow-xl">Level 3</div>
+                        <h2 class="text-6xl font-black text-slate-900 text-shadow" style="letter-spacing: -0.03em;">Add Instructions & Guardrails</h2>
+                    </div>
+
+                    <p class="text-2xl text-slate-600 font-semibold mb-10">Guide AI behavior with clear do's and don'ts</p>
+
+                    <div class="grid grid-cols-2 gap-8 mb-10">
+                        <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-8 rounded-3xl shadow-2xl border-4 border-green-300 text-center">
+                            <i class="fas fa-check-circle text-green-600 text-6xl mb-4"></i>
+                            <h3 class="text-2xl font-black text-slate-900 mb-3">Instructions</h3>
+                            <p class="text-lg text-slate-700 font-semibold">What TO Do</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-red-50 to-orange-50 p-8 rounded-3xl shadow-2xl border-4 border-red-300 text-center">
+                            <i class="fas fa-ban text-red-600 text-6xl mb-4"></i>
+                            <h3 class="text-2xl font-black text-slate-900 mb-3">Guardrails</h3>
+                            <p class="text-lg text-slate-700 font-semibold">What NOT To Do</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800 p-8 rounded-3xl shadow-2xl">
+                        <p class="text-lg font-bold text-green-400 mb-4">Example with Instructions & Guardrails:</p>
+                        <pre class="text-base text-green-400 font-mono overflow-x-auto leading-relaxed">Create a single-page HTML website about raising a dog.
+
+<span class="text-cyan-300">What:</span> Single-page HTML website about raising a dog
+<span class="text-cyan-300">Who:</span> Gift for my brother and sister-in-law getting their first dog (bichon frisé)
+<span class="text-cyan-300">Where:</span> GitHub Pages, mobile-friendly
+<span class="text-cyan-300">Why:</span> Help them feel prepared without overwhelming them
+<span class="text-cyan-300">When:</span> Current veterinary best practices
+
+<span class="text-yellow-300">Instructions:</span>
+- Title: "How to Raise <del>Train</del> a Dog" with &lt;del&gt; tag
+- 5 sections: puppy prep, bringing puppy home, feeding, health/vet, socialization
+- Tone: warm and encouraging, like advice from a knowledgeable friend
+- Length: 3-5 key points per section (no walls of text)
+- Design: Modern, clean, warm earth tone color palette, mobile responsive
+
+<span class="text-red-300">Guardrails:</span>
+- No formal "dog training manual" language
+- No excessive detail or breed-specific advice
+- No stock photos (use placeholders: Seb-1, Seb-2, etc.)
+- No emojis</pre>
+                    </div>
+                </div>
+            </div>
+
+<!-- Slide 18: Level 4 -->
+            <div :class="['slide', {active: currentSlide === 18}]">
+                <div class="max-w-7xl mx-auto w-full">
+                    <div class="flex items-center space-x-4 mb-8">
+                        <div class="bg-green-500 text-white px-8 py-4 rounded-full font-black text-3xl shadow-xl">Level 4</div>
+                        <h2 class="text-6xl font-black text-slate-900 text-shadow" style="letter-spacing: -0.03em;">Show What You Want</h2>
+                    </div>
+
+                    <p class="text-2xl text-slate-600 font-semibold mb-10">Provide concrete examples and visual references. Show Claude the exact output format through one-shot/few-shot examples (code pairs, text samples, PR descriptions), visual references (screenshots, mood boards, design comps), and style guides from component libraries.</p>
+
+                    <div class="bg-slate-800 p-8 rounded-3xl shadow-2xl">
+                        <p class="text-lg font-bold text-green-400 mb-4">Example adds Style References:</p>
+                        <pre class="text-sm text-green-400 font-mono overflow-x-auto leading-relaxed">Create a single-page HTML website about raising a dog.
+
+<span class="text-cyan-300">What:</span>
+- Single-page HTML website about raising a dog
+- 5 main sections covering puppy basics
+ - Attached as an artifact is my outline for the content proper
+
+<span class="text-cyan-300">Who:</span> 
+- This is a gift for my brother and his wife (my sister-in-law)
+- They're getting their first dog soon, a bichon frisé
+- They have close to no prior pet experience
+
+<span class="text-cyan-300">Where:</span>
+- Will be hosted on GitHub Pages
+- Needs to be mobile-friendly
+
+<span class="text-cyan-300">Why:</span>
+- Help them feel prepared without overwhelming them
+- Give them practical, actionable advice
+- Make it approachable and supportive
+
+<span class="text-cyan-300">When:</span>
+- Use current veterinary best practices
+- Consider Web Search for what food not to eat
+
+<span class="text-yellow-300">Instructions:</span>
+- Title: "How to Raise <del>Train</del> a Dog" with "Train" crossed out using &lt;del&gt; tag
+- Include exactly 5 main sections: puppy prep, bringing your puppy home, feeding, health/vet care, socialization, common mistakes
+- Tone: warm and encouraging, like advice from a knowledgeable friend - NOT clinical
+- Length: Each section should be 3-5 key points max (no walls of text)
+- Design: Modern, clean, warm earth tone color palette
+- Must be mobile responsive
+- Include smooth scrolling navigation between sections
+- Add subtle scroll animations
+
+<span class="text-red-300">Guardrails:</span>
+- Don't use formal "dog training manual" language
+- Don't overwhelm with excessive detail
+- Don't include breed-specific advice
+- Don't use stock photos, placeholder for image names is Seb-1, Seb-2, and as follows
+- No emojis
+
+<span class="text-purple-300">Style References (Tailwind demos):</span>
+<span class="text-blue-400">
+https://catalyst-demo.tailwindui.com/
+https://catalyst-demo.tailwindui.com/events
+https://catalyst-demo.tailwindui.com/orders
+https://catalyst-demo.tailwindui.com/settings</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 19: Level 5 -->
+            <div :class="['slide', {active: currentSlide === 19}]">
+                <div class="max-w-7xl mx-auto w-full">
+                    <div class="flex items-center space-x-4 mb-8">
+                        <div class="bg-blue-600 text-white px-8 py-4 rounded-full font-black text-3xl shadow-xl">Level 5</div>
+                        <h2 class="text-6xl font-black text-slate-900 text-shadow" style="letter-spacing: -0.03em;">Use XML Tags for Structure</h2>
+                    </div>
+
+                    <p class="text-2xl text-slate-600 font-semibold mb-10">Organize complex prompts with XML tags</p>
+
+                    <div class="grid grid-cols-3 gap-6 mb-10">
+                        <div class="bg-gradient-to-br from-blue-50 to-cyan-50 p-8 rounded-3xl shadow-2xl border-4 border-blue-300 text-center">
+                            <i class="fas fa-code text-blue-600 text-6xl mb-4"></i>
+                            <h3 class="text-2xl font-black text-slate-900 mb-3">Clear Structure</h3>
+                            <p class="text-lg text-slate-700">Prevents mixing instructions with examples</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-8 rounded-3xl shadow-2xl border-4 border-purple-300 text-center">
+                            <i class="fas fa-book-open text-purple-600 text-6xl mb-4"></i>
+                            <h3 class="text-2xl font-black text-slate-900 mb-3">Readable</h3>
+                            <p class="text-lg text-slate-700">Easy for humans and AI to parse</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-8 rounded-3xl shadow-2xl border-4 border-green-300 text-center">
+                            <i class="fas fa-robot text-green-600 text-6xl mb-4"></i>
+                            <h3 class="text-2xl font-black text-slate-900 mb-3">Claude-Trained</h3>
+                            <p class="text-lg text-slate-700">Specifically trained to recognize XML</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800 p-8 rounded-3xl shadow-2xl">
+                        <p class="text-lg font-bold text-green-400 mb-4">Example XML Structure:</p>
+                        <pre class="text-base text-green-400 font-mono overflow-x-auto leading-relaxed">&lt;task&gt;
+&lt;context&gt;
+&lt;what&gt;Single-page HTML website&lt;/what&gt;
+&lt;who&gt;First-time dog owners&lt;/who&gt;
+&lt;why&gt;Help them feel prepared&lt;/why&gt;
+&lt;where&gt;GitHub Pages, mobile-friendly&lt;/where&gt;
+&lt;when&gt;Current vet best practices&lt;/when&gt;
+&lt;/context&gt;
+                        
+&lt;instructions&gt;
+&lt;tone&gt;Warm and encouraging&lt;/tone&gt;
+&lt;design&gt;Modern, earth tones&lt;/design&gt;
+&lt;length&gt;3-5 key points per section&lt;/length&gt;
+&lt;/instructions&gt;
+                        
+&lt;guardrails&gt;
+&lt;exclude&gt;No formal language&lt;/exclude&gt;
+&lt;exclude&gt;No emojis&lt;/exclude&gt;
+&lt;/guardrails&gt;
+&lt;/task&gt;</pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 20: Demo -->
+            <div :class="['slide', {active: currentSlide === 20}]">
                 <div class="text-center max-w-5xl w-full">
                     <h2 class="text-6xl font-black gradient-text mb-12 text-shadow" style="letter-spacing: -0.03em;">
                         Live Demo
@@ -906,8 +1313,8 @@
                             <p class="text-3xl text-white font-bold leading-relaxed mb-12" style="letter-spacing: -0.01em;">
                                 Show how phrasing and structure can completely change AI responses
                             </p>
-                            <button class="px-16 py-5 bg-white text-[#0ca6ec] rounded-full text-2xl font-black shadow-2xl hover:shadow-3xl transition-all transform hover:scale-105 relative overflow-hidden group">
-                                <span class="relative z-10 flex items-center space-x-3">
+                            <button class="px-16 py-5 bg-white text-[#0ca6ec] rounded-full text-2xl font-black shadow-2xl hover:shadow-3xl transition-all transform hover:scale-105">
+                                <span class="flex items-center space-x-3">
                                     <i class="fas fa-rocket"></i>
                                     <span>Start Demo</span>
                                 </span>
@@ -917,8 +1324,8 @@
                 </div>
             </div>
 
-            <!-- Slide 12: Privacy -->
-            <div :class="['slide', {active: currentSlide === 12}]">
+            <!-- Slide 21: Privacy -->
+            <div :class="['slide', {active: currentSlide === 21}]">
                 <div class="max-w-5xl mx-auto w-full">
                     <h2 class="text-5xl font-black text-slate-900 mb-2 text-shadow" style="letter-spacing: -0.03em;">
                         Data Privacy & Guidelines
@@ -937,23 +1344,23 @@
                         <div class="space-y-4">
                             <div class="bg-white p-6 rounded-2xl flex items-center space-x-6 shadow-lg">
                                 <i class="fas fa-times-circle text-red-500 text-4xl"></i>
-                                <p class="text-xl text-slate-800 font-bold" style="letter-spacing: -0.01em;">Never input confidential data</p>
+                                <p class="text-xl text-slate-800 font-bold">Never input confidential data</p>
                             </div>
                             <div class="bg-white p-6 rounded-2xl flex items-center space-x-6 shadow-lg">
                                 <i class="fas fa-check-circle text-green-500 text-4xl"></i>
-                                <p class="text-xl text-slate-800 font-bold" style="letter-spacing: -0.01em;">Follow corporate AI usage policies</p>
+                                <p class="text-xl text-slate-800 font-bold">Follow corporate AI usage policies</p>
                             </div>
                             <div class="bg-white p-6 rounded-2xl flex items-center space-x-6 shadow-lg">
                                 <i class="fas fa-check-circle text-green-500 text-4xl"></i>
-                                <p class="text-xl text-slate-800 font-bold" style="letter-spacing: -0.01em;">Ensure ethical AI interactions</p>
+                                <p class="text-xl text-slate-800 font-bold">Ensure ethical AI interactions</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 13: Activity -->
-            <div :class="['slide', {active: currentSlide === 13}]">
+            <!-- Slide 22: Activity -->
+            <div :class="['slide', {active: currentSlide === 22}]">
                 <div class="max-w-6xl mx-auto text-center w-full">
                     <h2 class="text-6xl font-black gradient-text mb-12 text-shadow" style="letter-spacing: -0.03em;">
                         Hands-On Exercise
@@ -968,23 +1375,23 @@
                         <div class="grid grid-cols-3 gap-8">
                             <div class="bg-white p-8 rounded-2xl shadow-xl">
                                 <i class="fas fa-search text-purple-500 text-5xl mb-4"></i>
-                                <p class="text-2xl font-black text-slate-800" style="letter-spacing: -0.01em;">Spot Issues</p>
+                                <p class="text-2xl font-black text-slate-800">Spot Issues</p>
                             </div>
                             <div class="bg-white p-8 rounded-2xl shadow-xl">
                                 <i class="fas fa-edit text-blue-500 text-5xl mb-4"></i>
-                                <p class="text-2xl font-black text-slate-800" style="letter-spacing: -0.01em;">Refine Prompts</p>
+                                <p class="text-2xl font-black text-slate-800">Refine Prompts</p>
                             </div>
                             <div class="bg-white p-8 rounded-2xl shadow-xl">
                                 <i class="fas fa-trophy text-yellow-500 text-5xl mb-4"></i>
-                                <p class="text-2xl font-black text-slate-800" style="letter-spacing: -0.01em;">Get Results</p>
+                                <p class="text-2xl font-black text-slate-800">Get Results</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 14: Thank You -->
-            <div :class="['slide', {active: currentSlide === 14}]">
+            <!-- Slide 23: Thank You -->
+            <div :class="['slide', {active: currentSlide === 23}]">
                 <div class="text-center w-full">
                     <h1 class="text-7xl font-black gradient-text mb-10 text-shadow" style="letter-spacing: -0.03em;">
                         Thank You!
@@ -1004,7 +1411,6 @@
 
         </div>
 
-        <!-- Navigation -->
         <div class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-xl border-t-2 border-slate-200 p-6 shadow-2xl">
             <div class="max-w-7xl mx-auto flex items-center justify-between">
                 <button 
@@ -1041,7 +1447,7 @@
             data() {
                 return {
                     currentSlide: 0,
-                    slides: Array(15).fill(null)
+                    slides: Array(24).fill(null)
                 }
             },
             methods: {
