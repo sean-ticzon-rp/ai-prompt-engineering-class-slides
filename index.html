@@ -19,21 +19,41 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
             overflow: hidden;
             background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            height: 100vh;
         }
         .slide {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            min-height: calc(100vh - 200px);
+            bottom: 0;
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.6s ease, visibility 0.6s ease;
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
         }
         .slide.active {
             opacity: 1;
             visibility: visible;
             z-index: 1;
+        }
+        
+        /* Make content containers responsive */
+        .slide > div {
+            width: 100%;
+            max-height: 100%;
+            overflow-y: auto;
+        }
+        
+        /* Ensure images scale properly */
+        img {
+            max-width: 100%;
+            height: auto;
         }
         .logo-float {
             animation: float 6s ease-in-out infinite;
@@ -145,7 +165,137 @@
         }
         .slides-container {
             position: relative;
-            min-height: calc(100vh - 200px);
+            height: calc(100vh - 150px);
+            overflow: hidden;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1536px) {
+            .text-7xl { font-size: 4rem !important; }
+            .text-6xl { font-size: 3.5rem !important; }
+            .text-5xl { font-size: 3rem !important; }
+            .text-4xl { font-size: 2.5rem !important; }
+            .text-3xl { font-size: 2rem !important; }
+            .max-w-7xl { max-width: 60rem; }
+            .max-w-6xl { max-width: 50rem; }
+            .max-w-5xl { max-width: 42rem; }
+        }
+        
+        @media (max-width: 1280px) {
+            .text-7xl { font-size: 3.5rem !important; }
+            .text-6xl { font-size: 3rem !important; }
+            .text-5xl { font-size: 2.5rem !important; }
+            .text-4xl { font-size: 2rem !important; }
+            .text-3xl { font-size: 1.75rem !important; }
+            .text-2xl { font-size: 1.5rem !important; }
+            .p-16 { padding: 2.5rem !important; }
+            .p-12 { padding: 2rem !important; }
+            .p-10 { padding: 1.75rem !important; }
+            .max-w-7xl { max-width: 55rem; }
+            .max-w-6xl { max-width: 45rem; }
+            .max-w-5xl { max-width: 38rem; }
+            .h-80 { height: 16rem !important; }
+            .h-72 { height: 14rem !important; }
+            .mb-16 { margin-bottom: 2.5rem !important; }
+            .mb-12 { margin-bottom: 2rem !important; }
+            .mb-10 { margin-bottom: 1.5rem !important; }
+        }
+        
+        @media (max-width: 1024px) {
+            .text-8xl { font-size: 4rem !important; }
+            .text-7xl { font-size: 3rem !important; }
+            .text-6xl { font-size: 2.5rem !important; }
+            .text-5xl { font-size: 2rem !important; }
+            .text-4xl { font-size: 1.75rem !important; }
+            .text-3xl { font-size: 1.5rem !important; }
+            .text-2xl { font-size: 1.25rem !important; }
+            .text-xl { font-size: 1.125rem !important; }
+            .p-20 { padding: 2.5rem !important; }
+            .p-16 { padding: 2rem !important; }
+            .p-12 { padding: 1.75rem !important; }
+            .p-10 { padding: 1.5rem !important; }
+            .p-8 { padding: 1.25rem !important; }
+            .mb-16 { margin-bottom: 2rem !important; }
+            .mb-12 { margin-bottom: 1.5rem !important; }
+            .mb-10 { margin-bottom: 1.25rem !important; }
+            .mb-8 { margin-bottom: 1rem !important; }
+            .max-w-7xl { max-width: 48rem; }
+            .max-w-6xl { max-width: 40rem; }
+            .max-w-5xl { max-width: 32rem; }
+            .h-80 { height: 14rem !important; }
+            .h-72 { height: 12rem !important; }
+            .h-48 { height: 10rem !important; }
+            /* Make grids responsive */
+            .grid-cols-5 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+            .grid-cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+        }
+        
+        @media (max-width: 768px) {
+            .text-8xl { font-size: 3rem !important; }
+            .text-7xl { font-size: 2.5rem !important; }
+            .text-6xl { font-size: 2rem !important; }
+            .text-5xl { font-size: 1.75rem !important; }
+            .text-4xl { font-size: 1.5rem !important; }
+            .text-3xl { font-size: 1.25rem !important; }
+            .text-2xl { font-size: 1.125rem !important; }
+            .text-xl { font-size: 1rem !important; }
+            .text-lg { font-size: 0.95rem !important; }
+            .text-base { font-size: 0.9rem !important; }
+            .p-20 { padding: 1.5rem !important; }
+            .p-16 { padding: 1.5rem !important; }
+            .p-12 { padding: 1.25rem !important; }
+            .p-10 { padding: 1rem !important; }
+            .p-8 { padding: 0.875rem !important; }
+            .p-6 { padding: 0.75rem !important; }
+            .gap-8 { gap: 0.875rem !important; }
+            .gap-6 { gap: 0.75rem !important; }
+            .gap-5 { gap: 0.625rem !important; }
+            .gap-4 { gap: 0.5rem !important; }
+            .space-x-8 > * + * { margin-left: 0.875rem !important; }
+            .space-x-6 > * + * { margin-left: 0.75rem !important; }
+            .mb-16 { margin-bottom: 1.5rem !important; }
+            .mb-12 { margin-bottom: 1.25rem !important; }
+            .mb-10 { margin-bottom: 1rem !important; }
+            .mb-8 { margin-bottom: 0.875rem !important; }
+            .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-4xl { max-width: 100%; }
+            .h-80 { height: 12rem !important; }
+            .h-72 { height: 10rem !important; }
+            .h-48 { height: 8rem !important; }
+            .h-24 { height: 5rem !important; }
+            .h-20 { height: 4rem !important; }
+            /* Stack grids on mobile */
+            .grid-cols-5 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+            .grid-cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+            .grid-cols-3 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }
+            .grid-cols-2 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }
+            /* Adjust spacing */
+            .space-y-5 > * + * { margin-top: 0.875rem !important; }
+            .space-y-4 > * + * { margin-top: 0.75rem !important; }
+        }
+        
+        @media (max-width: 640px) {
+            .slides-container { padding: 0.5rem; }
+            .slide { padding: 0.75rem; }
+            .text-8xl { font-size: 2.5rem !important; }
+            .text-7xl { font-size: 2rem !important; }
+            .text-6xl { font-size: 1.75rem !important; }
+            .text-5xl { font-size: 1.5rem !important; }
+            .text-4xl { font-size: 1.25rem !important; }
+            .text-3xl { font-size: 1.125rem !important; }
+            .text-2xl { font-size: 1rem !important; }
+            .p-16 { padding: 1.25rem !important; }
+            .p-12 { padding: 1rem !important; }
+            .p-10 { padding: 0.875rem !important; }
+            .p-8 { padding: 0.75rem !important; }
+            .h-80 { height: 10rem !important; }
+            .h-72 { height: 8rem !important; }
+            .h-48 { height: 6rem !important; }
+            .h-24 { height: 4rem !important; }
+            .h-20 { height: 3rem !important; }
+            .mb-16 { margin-bottom: 1.25rem !important; }
+            .mb-12 { margin-bottom: 1rem !important; }
+            .mb-10 { margin-bottom: 0.875rem !important; }
+            .mb-8 { margin-bottom: 0.75rem !important; }
         }
     </style>
 </head>
@@ -162,31 +312,32 @@
         <div class="slides-container p-8">
             
             <!-- Slide 0: Company Logo -->
-            <div :class="['slide', 'flex', 'flex-col', 'items-center', 'justify-center', {active: currentSlide === 0}]">
-                <div class="logo-float mb-12">
-                    <div class="relative">
-                        <div class="absolute inset-0 bg-gradient-to-r from-[#0ca6ec] to-[#0891d1] rounded-3xl blur-3xl opacity-40"></div>
-                        <div class="relative bg-gradient-to-br from-[#0ca6ec] to-[#0891d1] rounded-3xl p-16 glow shine">
-                            <div class="text-white text-8xl font-black tracking-tight" style="line-height: 1;">
-                                RP
+            <div :class="['slide', {active: currentSlide === 0}]">
+                <div class="flex flex-col items-center justify-center w-full h-full">
+                    <div class="logo-float mb-12">
+                        <div class="relative">
+                            <div class="absolute inset-0 bg-gradient-to-r from-[#0ca6ec] to-[#0891d1] rounded-3xl blur-3xl opacity-40"></div>
+                            <div class="relative bg-gradient-to-br from-[#0ca6ec] to-[#0891d1] rounded-3xl p-16 glow shine flex items-center justify-center">
+                                <!-- Replace 'logo.png' with your actual logo filename -->
+                                <img src="rp.png" alt="Rocket Partners Logo" class="max-w-xs max-h-48 w-auto h-auto object-contain">
                             </div>
                         </div>
                     </div>
+                    <h1 class="text-6xl font-black text-slate-900 mb-5 text-center text-shadow" style="letter-spacing: -0.02em;">
+                        Rocket Partners
+                    </h1>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-16 h-0.5 bg-gradient-to-r from-transparent via-[#0ca6ec] to-transparent"></div>
+                        <i class="fas fa-rocket text-[#0ca6ec] text-4xl pulse-slow"></i>
+                        <div class="w-16 h-0.5 bg-gradient-to-r from-transparent via-[#0ca6ec] to-transparent"></div>
+                    </div>
+                    <p class="text-2xl text-slate-600 font-medium">AI Training Session 2025</p>
                 </div>
-                <h1 class="text-6xl font-black text-slate-900 mb-5 text-center text-shadow" style="letter-spacing: -0.02em;">
-                    Rocket Partners
-                </h1>
-                <div class="flex items-center space-x-3 mb-6">
-                    <div class="w-16 h-0.5 bg-gradient-to-r from-transparent via-[#0ca6ec] to-transparent"></div>
-                    <i class="fas fa-rocket text-[#0ca6ec] text-4xl pulse-slow"></i>
-                    <div class="w-16 h-0.5 bg-gradient-to-r from-transparent via-[#0ca6ec] to-transparent"></div>
-                </div>
-                <p class="text-2xl text-slate-600 font-medium">AI Training Session 2025</p>
             </div>
 
             <!-- Slide 1: Title -->
-            <div :class="['slide', 'flex', 'flex-col', 'items-center', 'justify-center', {active: currentSlide === 1}]">
-                <div class="text-center max-w-5xl mx-auto">
+            <div :class="['slide', {active: currentSlide === 1}]">
+                <div class="text-center max-w-5xl mx-auto w-full">
                     <div class="mb-10">
                         <i class="fas fa-brain gradient-text text-7xl pulse-slow"></i>
                     </div>
@@ -200,67 +351,239 @@
                 </div>
             </div>
 
-            <!-- Slide 2: Evolution -->
-            <div :class="['slide', 'flex', 'flex-col', 'justify-center', {active: currentSlide === 2}]">
-                <div class="max-w-5xl mx-auto w-full">
-                    <h2 class="text-5xl font-black text-slate-900 mb-2 text-shadow" style="letter-spacing: -0.03em;">
-                        From Commands to Conversations
+            <!-- Slide 2: Background -->
+            <div :class="['slide', {active: currentSlide === 2}]">
+                <div class="text-center max-w-5xl mx-auto w-full">
+                    <div class="mb-10">
+                        <i class="fas fa-history gradient-text text-7xl pulse-slow"></i>
+                    </div>
+                    <h1 class="text-6xl font-black text-slate-900 mb-6 leading-tight text-shadow" style="letter-spacing: -0.03em;">
+                        Background
+                    </h1>
+                    <div class="w-24 h-1.5 bg-gradient-to-r from-[#0ca6ec] to-[#0891d1] mx-auto mb-8 rounded-full"></div>
+                    <p class="text-3xl text-slate-600 font-semibold leading-relaxed" style="letter-spacing: -0.01em;">
+                        Understanding the Journey to Modern AI
+                    </p>
+                </div>
+            </div>
+
+            <!-- Slide 3: Evolution of HCI -->
+            <div :class="['slide', {active: currentSlide === 3}]">
+                <div class="max-w-6xl mx-auto w-full">
+                    <h2 class="text-5xl font-black text-slate-900 mb-3 text-shadow" style="letter-spacing: -0.03em;">
+                        The Communication Gap
                     </h2>
-                    <div class="w-20 h-1 bg-gradient-to-r from-[#0ca6ec] to-transparent mb-12 rounded-full"></div>
-                    <div class="space-y-5">
-                        <div class="card bg-white p-8 rounded-2xl shadow-xl border-l-6 border-[#0ca6ec] flex items-center space-x-6">
-                            <div class="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-2xl">
-                                <i class="fas fa-terminal text-[#0ca6ec] text-5xl"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="text-3xl font-bold text-slate-900 mb-2" style="letter-spacing: -0.02em;">Command-line Interfaces</h3>
-                                <p class="text-lg text-slate-600 font-medium">Text-based commands and scripts</p>
+                    <p class="text-xl text-slate-600 font-semibold mb-8 max-w-4xl">
+                        Computers are incredibly powerful, but they've always been terrible at understanding what we actually want.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <!-- Command Line Era -->
+                        <div class="card bg-gradient-to-br from-slate-50 to-blue-50 p-5 rounded-2xl shadow-lg border-2 border-slate-200">
+                            <div class="flex items-start space-x-5">
+                                <div class="bg-white p-4 rounded-xl shadow-md flex-shrink-0">
+                                    <i class="fas fa-terminal text-slate-700 text-3xl"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h3 class="text-2xl font-black text-slate-900" style="letter-spacing: -0.02em;">Command Line Era</h3>
+                                        <span class="text-xs font-bold text-slate-500 bg-white px-3 py-1 rounded-full whitespace-nowrap">1960s–1980s</span>
+                                    </div>
+                                    <div class="bg-slate-800 p-3 rounded-lg mb-3 font-mono text-green-400 text-xs">
+                                        <div class="mb-1">$ ls -la /home/user/documents</div>
+                                        <div>$ grep "error" logfile.txt | wc -l</div>
+                                    </div>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <img src="cmd.jpg" 
+                                         alt="Command Line Interface" 
+                                         class="w-32 h-24 object-cover rounded-xl border-2 border-slate-300 shadow-md hover:border-[#0ca6ec] transition-all">
+                                </div>
                             </div>
                         </div>
-                        <div class="card bg-white p-8 rounded-2xl shadow-xl border-l-6 border-purple-500 flex items-center space-x-6">
-                            <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-2xl">
-                                <i class="fas fa-desktop text-purple-500 text-5xl"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="text-3xl font-bold text-slate-900 mb-2" style="letter-spacing: -0.02em;">Graphical Interfaces</h3>
-                                <p class="text-lg text-slate-600 font-medium">Visual elements and mouse interactions</p>
+
+                        <!-- GUI Revolution -->
+                        <div class="card bg-gradient-to-br from-purple-50 to-pink-50 p-5 rounded-2xl shadow-lg border-2 border-purple-200">
+                            <div class="flex items-start space-x-5">
+                                <div class="bg-white p-4 rounded-xl shadow-md flex-shrink-0">
+                                    <i class="fas fa-mouse-pointer text-purple-600 text-3xl"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h3 class="text-2xl font-black text-slate-900" style="letter-spacing: -0.02em;">GUI Revolution</h3>
+                                        <span class="text-xs font-bold text-slate-500 bg-white px-3 py-1 rounded-full whitespace-nowrap">1980s–2000s</span>
+                                    </div>
+                                    <div class="grid grid-cols-4 gap-2 mb-2">
+                                        <div class="bg-white p-2 rounded-lg shadow-sm text-center">
+                                            <i class="fas fa-folder text-yellow-500 text-xl mb-1"></i>
+                                            <p class="text-xs text-slate-600">Files</p>
+                                        </div>
+                                        <div class="bg-white p-2 rounded-lg shadow-sm text-center">
+                                            <i class="fas fa-save text-blue-500 text-xl mb-1"></i>
+                                            <p class="text-xs text-slate-600">Save</p>
+                                        </div>
+                                        <div class="bg-white p-2 rounded-lg shadow-sm text-center">
+                                            <i class="fas fa-print text-slate-600 text-xl mb-1"></i>
+                                            <p class="text-xs text-slate-600">Print</p>
+                                        </div>
+                                        <div class="bg-white p-2 rounded-lg shadow-sm text-center">
+                                            <i class="fas fa-cog text-slate-500 text-xl mb-1"></i>
+                                            <p class="text-xs text-slate-600">Settings</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <img src="win95.png" 
+                                         alt="GUI Revolution Interface" 
+                                         class="w-32 h-24 object-cover rounded-xl border-2 border-purple-300 shadow-md hover:border-purple-500 transition-all">
+                                </div>
                             </div>
                         </div>
-                        <div class="card bg-white p-8 rounded-2xl shadow-xl border-l-6 border-green-500 flex items-center space-x-6">
-                            <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-2xl">
-                                <i class="fas fa-comment-dots text-green-500 text-5xl"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="text-3xl font-bold text-slate-900 mb-2" style="letter-spacing: -0.02em;">Conversational AI</h3>
-                                <p class="text-lg text-slate-600 font-medium">Natural language understanding</p>
+
+                        <!-- Natural Language Attempts -->
+                        <div class="card bg-gradient-to-br from-green-50 to-emerald-50 p-5 rounded-2xl shadow-lg border-2 border-green-200">
+                            <div class="flex items-start space-x-5">
+                                <div class="bg-white p-4 rounded-xl shadow-md flex-shrink-0">
+                                    <i class="fas fa-comments text-green-600 text-3xl"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h3 class="text-2xl font-black text-slate-900" style="letter-spacing: -0.02em;">Natural Language Attempts</h3>
+                                        <span class="text-xs font-bold text-slate-500 bg-white px-3 py-1 rounded-full whitespace-nowrap">2000s–2010s</span>
+                                    </div>
+                                    <div class="bg-white p-3 rounded-lg mb-2 border-2 border-green-200">
+                                        <div class="flex items-center space-x-2 mb-2">
+                                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                                <i class="fas fa-user text-white text-xs"></i>
+                                            </div>
+                                            <p class="text-xs text-slate-700">"What's the weather today?"</p>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                                <i class="fas fa-robot text-white text-xs"></i>
+                                            </div>
+                                            <p class="text-xs text-slate-700">"I don't understand. Please rephrase."</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2 flex-shrink-0">
+                                    <img src="nla 2.png" 
+                                         alt="Early Chatbot Interface" 
+                                         class="w-28 h-20 object-cover rounded-xl border-2 border-green-300 shadow-md hover:border-green-500 transition-all">
+                                    <img src="nla1.jpeg" 
+                                         alt="Virtual Assistant Interface" 
+                                         class="w-28 h-20 object-cover rounded-xl border-2 border-emerald-300 shadow-md hover:border-emerald-500 transition-all">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 3: Analytics -->
-            <div :class="['slide', 'flex', 'flex-col', 'items-center', 'justify-center', {active: currentSlide === 3}]">
-                <div class="text-center max-w-5xl mx-auto">
+            <!-- Slide 4: The Vision & Question -->
+            <div :class="['slide', {active: currentSlide === 4}]">
+                <div class="max-w-5xl mx-auto text-center w-full">
                     <h2 class="text-5xl font-black text-slate-900 mb-12 text-shadow" style="letter-spacing: -0.03em;">
-                        Predictive Analytics Foundation
+                        What We've Always Wanted
                     </h2>
-                    <div class="relative bg-white rounded-3xl p-16 shadow-2xl border-4 border-blue-100">
-                        <div class="absolute inset-0 bg-gradient-to-br from-blue-50 via-cyan-50 to-slate-50 rounded-3xl opacity-60"></div>
-                        <div class="relative">
-                            <div class="inline-block bg-gradient-to-br from-blue-100 to-cyan-100 p-10 rounded-full mb-8">
-                                <i class="fas fa-chart-line text-[#0ca6ec] text-7xl pulse-slow"></i>
+                    
+                    <!-- Main Quote -->
+                    <div class="relative mb-16">
+                        <div class="absolute inset-0 bg-gradient-to-br from-[#0ca6ec]/20 to-blue-200/30 rounded-3xl blur-2xl"></div>
+                        <div class="relative bg-gradient-to-br from-white to-blue-50 p-16 rounded-3xl shadow-2xl border-2 border-blue-100">
+                            <i class="fas fa-quote-left text-[#0ca6ec] text-5xl mb-8 opacity-30"></i>
+                            <p class="text-4xl text-slate-800 font-bold leading-relaxed mb-8" style="letter-spacing: -0.01em;">
+                                Just tell the computer what you need, like you would tell a colleague, and it figures out how to do it.
+                            </p>
+                            <i class="fas fa-quote-right text-[#0ca6ec] text-5xl opacity-30"></i>
+                        </div>
+                    </div>
+
+                    <!-- The Question -->
+                    <div class="bg-gradient-to-br from-slate-50 to-purple-50 p-12 rounded-3xl shadow-xl border-2 border-purple-200">
+                        <h3 class="text-3xl font-black text-slate-900 mb-6 text-shadow" style="letter-spacing: -0.02em;">
+                            The Question This Raises:
+                        </h3>
+                        <p class="text-3xl text-purple-700 font-bold leading-relaxed" style="letter-spacing: -0.01em;">
+                            What changed? How did we go from scripted chatbots to AI that can understand nuanced requests?
+                        </p>
+                        <div class="mt-8">
+                            <i class="fas fa-arrow-down text-purple-500 text-4xl pulse-slow"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Predictive Analytics -->
+            <div :class="['slide', {active: currentSlide === 5}]">
+                <div class="max-w-6xl mx-auto w-full">
+                    <h2 class="text-5xl font-black text-slate-900 mb-3 text-shadow" style="letter-spacing: -0.03em;">
+                        From Numbers to Understanding
+                    </h2>
+                    <p class="text-xl text-slate-600 font-semibold mb-10 max-w-4xl">
+                        Before AI could understand what you meant, it first learned to predict what comes next.
+                    </p>
+
+                    <div class="bg-gradient-to-br from-blue-50 via-cyan-50 to-white p-10 rounded-3xl shadow-2xl border-2 border-blue-200">
+                        <div class="flex items-center space-x-6 mb-8">
+                            <div class="bg-white p-8 rounded-2xl shadow-lg">
+                                <i class="fas fa-chart-line text-[#0ca6ec] text-6xl pulse-slow"></i>
                             </div>
-                            <p class="text-3xl text-slate-800 font-bold leading-relaxed" style="letter-spacing: -0.01em;">
-                                Data-driven forecasting built the backbone for intelligent automation
+                            <div>
+                                <h3 class="text-3xl font-black text-slate-900 mb-2" style="letter-spacing: -0.02em;">Early Predictive Analytics</h3>
+                                <span class="text-sm font-bold text-slate-500 bg-white px-4 py-2 rounded-full">1990s–2000s</span>
+                            </div>
+                        </div>
+
+                        <p class="text-lg text-slate-700 font-semibold mb-8">
+                            Using historical data to forecast future outcomes
+                        </p>
+
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="bg-white p-4 rounded-2xl shadow-lg overflow-hidden">
+                                <img src="lg 2.png" 
+                                     alt="Early Analytics Dashboard" 
+                                     class="w-full h-48 object-cover rounded-lg border-2 border-blue-200 hover:border-[#0ca6ec] transition-all">
+                                <p class="text-xs font-semibold text-slate-500 text-center mt-3">Early Analytics Dashboards</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-2xl shadow-lg overflow-hidden">
+                                <img src="tf.gif" 
+                                     alt="Data Visualization Graphs" 
+                                     class="w-full h-48 object-cover rounded-lg border-2 border-cyan-200 hover:border-[#0ca6ec] transition-all">
+                                <p class="text-xs font-semibold text-slate-500 text-center mt-3">Data Visualization Graphs</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 grid grid-cols-3 gap-4">
+                            <div class="bg-white p-4 rounded-xl shadow-md text-center">
+                                <i class="fas fa-database text-[#0ca6ec] text-2xl mb-2"></i>
+                                <p class="text-sm font-bold text-slate-800">Historical Data</p>
+                                <p class="text-xs text-slate-600 mt-1">Pattern Recognition</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-xl shadow-md text-center">
+                                <i class="fas fa-project-diagram text-purple-500 text-2xl mb-2"></i>
+                                <p class="text-sm font-bold text-slate-800">Forecasting Models</p>
+                                <p class="text-xs text-slate-600 mt-1">Future Predictions</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-xl shadow-md text-center">
+                                <i class="fas fa-hand-point-up text-amber-500 text-2xl mb-2"></i>
+                                <p class="text-sm font-bold text-slate-800">Manual Features</p>
+                                <p class="text-xs text-slate-600 mt-1">Human Selection</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 bg-amber-50 p-4 rounded-xl border-l-4 border-amber-400">
+                            <p class="text-base text-slate-800 font-semibold">
+                                <i class="fas fa-exclamation-triangle text-amber-500 mr-2"></i>
+                                <strong>Limitation:</strong> Required manual feature selection—humans had to tell the system what patterns to look for
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 4: Breakthroughs -->
-            <div :class="['slide', 'flex', 'flex-col', 'justify-center', {active: currentSlide === 4}]">
+            <!-- Slide 6: Breakthroughs -->
+            <div :class="['slide', {active: currentSlide === 6}]">
                 <div class="max-w-5xl mx-auto w-full">
                     <h2 class="text-5xl font-black text-slate-900 mb-2 text-shadow" style="letter-spacing: -0.03em;">
                         Key Technological Breakthroughs
@@ -304,47 +627,273 @@
                 </div>
             </div>
 
-            <!-- Slide 5: Prompt Engineering -->
-            <div :class="['slide', 'flex', 'flex-col', 'justify-center', {active: currentSlide === 5}]">
-                <div class="max-w-6xl mx-auto w-full">
-                    <h2 class="text-5xl font-black text-slate-900 mb-2 text-center text-shadow" style="letter-spacing: -0.03em;">
-                        What is Prompt Engineering?
+            <!-- Slide 7: How LLMs Work -->
+            <div :class="['slide', {active: currentSlide === 7}]">
+                <div class="max-w-7xl mx-auto w-full px-4">
+                    <h2 class="text-5xl font-black text-slate-900 mb-3 text-shadow" style="letter-spacing: -0.03em;">
+                        Inside the Large Language Model
                     </h2>
-                    <div class="w-20 h-1 bg-gradient-to-r from-[#0ca6ec] to-transparent mx-auto mb-10 rounded-full"></div>
-                    <div class="bg-gradient-to-br from-slate-50 to-blue-50 p-12 rounded-3xl mb-8 shadow-xl border-2 border-slate-200">
-                        <p class="text-2xl text-slate-800 font-bold leading-relaxed text-center" style="letter-spacing: -0.01em;">
-                            The process of designing effective inputs to guide LLMs like ChatGPT or Claude
-                        </p>
+                    <p class="text-xl text-slate-600 font-semibold mb-8 max-w-5xl">
+                        Large Language Models use transformer architecture to understand and generate text, identifying relationships between words and context.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-8 mb-6">
+                        <div class="bg-white p-6 rounded-2xl shadow-xl border-2 border-blue-200">
+                            <img src="transformers.png" 
+                                 alt="Transformer Architecture Diagram" 
+                                 class="w-full h-80 object-contain rounded-xl border-2 border-blue-300 hover:border-[#0ca6ec] transition-all mb-4">
+                            <p class="text-base font-bold text-slate-600 text-center">Transformer Architecture & Attention Flow</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-xl border-2 border-purple-200">
+                            <img src="prediction.jpeg" 
+                                 alt="Next-Word Prediction Process" 
+                                 class="w-full h-80 object-contain rounded-xl border-2 border-purple-300 hover:border-purple-500 transition-all mb-4">
+                            <p class="text-base font-bold text-slate-600 text-center">Next-Word Prediction Process</p>
+                        </div>
                     </div>
-                    <div class="grid grid-cols-3 gap-6">
-                        <div class="card bg-white p-8 rounded-2xl shadow-xl text-center border-t-6 border-yellow-400">
-                            <div class="bg-gradient-to-br from-yellow-50 to-amber-50 w-24 h-24 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                                <i class="fas fa-lightbulb text-yellow-500 text-5xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-black text-slate-900 mb-3" style="letter-spacing: -0.02em;">Inspire Creativity</h3>
-                            <p class="text-base text-slate-600 font-semibold">Unlock imaginative responses</p>
+
+                    <div class="grid grid-cols-5 gap-3">
+                        <div class="bg-gradient-to-br from-blue-50 to-cyan-50 p-4 rounded-xl shadow-lg text-center border-2 border-blue-200">
+                            <i class="fas fa-project-diagram text-blue-600 text-2xl mb-2"></i>
+                            <p class="text-xs font-bold text-slate-800">Transformer Architecture</p>
+                            <p class="text-xs text-slate-600 mt-1">Neural networks with attention</p>
                         </div>
-                        <div class="card bg-white p-8 rounded-2xl shadow-xl text-center border-t-6 border-purple-400">
-                            <div class="bg-gradient-to-br from-purple-50 to-pink-50 w-24 h-24 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                                <i class="fas fa-magic text-purple-500 text-5xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-black text-slate-900 mb-3" style="letter-spacing: -0.02em;">Control Outputs</h3>
-                            <p class="text-base text-slate-600 font-semibold">Guide model behavior</p>
+                        <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-4 rounded-xl shadow-lg text-center border-2 border-purple-200">
+                            <i class="fas fa-database text-purple-600 text-2xl mb-2"></i>
+                            <p class="text-xs font-bold text-slate-800">Massive Training</p>
+                            <p class="text-xs text-slate-600 mt-1">Billions of parameters</p>
                         </div>
-                        <div class="card bg-white p-8 rounded-2xl shadow-xl text-center border-t-6 border-green-400">
-                            <div class="bg-gradient-to-br from-green-50 to-emerald-50 w-24 h-24 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                                <i class="fas fa-bullseye text-green-500 text-5xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-black text-slate-900 mb-3" style="letter-spacing: -0.02em;">Achieve Precision</h3>
-                            <p class="text-base text-slate-600 font-semibold">Get accurate results</p>
+                        <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-4 rounded-xl shadow-lg text-center border-2 border-green-200">
+                            <i class="fas fa-cubes text-green-600 text-2xl mb-2"></i>
+                            <p class="text-xs font-bold text-slate-800">Tokenization</p>
+                            <p class="text-xs text-slate-600 mt-1">Text to embeddings</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-amber-50 to-orange-50 p-4 rounded-xl shadow-lg text-center border-2 border-amber-200">
+                            <i class="fas fa-search text-amber-600 text-2xl mb-2"></i>
+                            <p class="text-xs font-bold text-slate-800">Pattern Analysis</p>
+                            <p class="text-xs text-slate-600 mt-1">Grammar & meaning</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-teal-50 to-cyan-50 p-4 rounded-xl shadow-lg text-center border-2 border-teal-200">
+                            <i class="fas fa-comment-dots text-teal-600 text-2xl mb-2"></i>
+                            <p class="text-xs font-bold text-slate-800">Text Generation</p>
+                            <p class="text-xs text-slate-600 mt-1">Coherent responses</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 6: Demo -->
-            <div :class="['slide', 'flex', 'flex-col', 'items-center', 'justify-center', {active: currentSlide === 6}]">
-                <div class="text-center max-w-5xl">
+            <!-- Slide 8: How LLMs Understand Your Prompt -->
+            <div :class="['slide', {active: currentSlide === 8}]">
+                <div class="max-w-6xl mx-auto w-full">
+                    <h2 class="text-5xl font-black text-slate-900 mb-3 text-shadow" style="letter-spacing: -0.03em;">
+                        From Words to Meaning
+                    </h2>
+                    <p class="text-xl text-slate-600 font-semibold mb-10 max-w-5xl">
+                        Every time you type a prompt, the LLM breaks your text into tokens, assigns each a mathematical representation, and uses attention mechanisms to interpret meaning before generating a response.
+                    </p>
+
+                    <div class="bg-gradient-to-br from-slate-50 to-blue-50 p-8 rounded-3xl shadow-2xl border-2 border-slate-200 mb-8">
+                        <h3 class="text-3xl font-black text-slate-900 mb-6" style="letter-spacing: -0.02em;">The Process</h3>
+                        
+                        <div class="grid grid-cols-4 gap-4 mb-8">
+                            <div class="bg-white p-6 rounded-2xl shadow-lg text-center border-l-4 border-blue-500">
+                                <div class="text-4xl font-black text-blue-600 mb-2">1</div>
+                                <i class="fas fa-cut text-blue-500 text-3xl mb-3"></i>
+                                <h4 class="text-lg font-bold text-slate-900 mb-2">Tokenization</h4>
+                                <p class="text-sm text-slate-600">Split text into smaller units (tokens)</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-2xl shadow-lg text-center border-l-4 border-purple-500">
+                                <div class="text-4xl font-black text-purple-600 mb-2">2</div>
+                                <i class="fas fa-code text-purple-500 text-3xl mb-3"></i>
+                                <h4 class="text-lg font-bold text-slate-900 mb-2">Embeddings</h4>
+                                <p class="text-sm text-slate-600">Convert to numerical representations</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-2xl shadow-lg text-center border-l-4 border-green-500">
+                                <div class="text-4xl font-black text-green-600 mb-2">3</div>
+                                <i class="fas fa-eye text-green-500 text-3xl mb-3"></i>
+                                <h4 class="text-lg font-bold text-slate-900 mb-2">Attention</h4>
+                                <p class="text-sm text-slate-600">Focus on key parts of input</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-2xl shadow-lg text-center border-l-4 border-amber-500">
+                                <div class="text-4xl font-black text-amber-600 mb-2">4</div>
+                                <i class="fas fa-brain text-amber-500 text-3xl mb-3"></i>
+                                <h4 class="text-lg font-bold text-slate-900 mb-2">Prediction</h4>
+                                <p class="text-sm text-slate-600">Generate coherent responses</p>
+                            </div>
+                        </div>
+
+                        <!-- Centered Tokenization Sample -->
+                        <div class="flex justify-center">
+                            <div class="bg-white p-8 rounded-2xl shadow-xl border-2 border-sky-300 max-w-3xl w-full">
+                                <img src="tokenization.png" 
+                                     alt="Tokenization Sample Output" 
+                                     class="w-full h-72 object-contain rounded-xl border-2 border-sky-400 hover:border-sky-600 transition-all mb-4">
+                                <p class="text-lg font-bold text-slate-600 text-center">Tokenization Sample Output</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9: Understanding the LLM Landscape -->
+            <div :class="['slide', {active: currentSlide === 9}]">
+                <div class="max-w-6xl mx-auto w-full">
+                    <h2 class="text-5xl font-black text-slate-900 mb-3 text-shadow" style="letter-spacing: -0.03em;">
+                        Comparing Popular LLMs
+                    </h2>
+                    <p class="text-lg text-slate-600 font-semibold mb-8">Overview of major LLMs and their best use cases</p>
+
+                    <div class="grid grid-cols-2 gap-5">
+                        <div class="card bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-2xl shadow-xl border-2 border-green-200">
+                            <div class="flex items-start space-x-4 mb-4">
+                                <img src="chatgpt.jpeg" 
+                                     alt="ChatGPT Logo" 
+                                     class="w-20 h-20 rounded-xl border-2 border-green-400 shadow-md object-cover">
+                                <div>
+                                    <h3 class="text-2xl font-black text-slate-900 mb-1">ChatGPT</h3>
+                                    <p class="text-sm font-semibold text-green-700">OpenAI</p>
+                                </div>
+                            </div>
+                            <p class="text-base text-slate-700 font-semibold mb-3">Versatile conversational AI assistant</p>
+                            <div class="bg-white p-3 rounded-xl">
+                                <p class="text-sm font-bold text-slate-600 mb-1">Best For:</p>
+                                <p class="text-sm text-slate-700">General tasks, research, complex reasoning, image generation, integrations</p>
+                            </div>
+                        </div>
+
+                        <div class="card bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-2xl shadow-xl border-2 border-blue-200">
+                            <div class="flex items-start space-x-4 mb-4">
+                                <img src="claude.jpeg" 
+                                     alt="Claude Logo" 
+                                     class="w-20 h-20 rounded-xl border-2 border-blue-400 shadow-md object-cover">
+                                <div>
+                                    <h3 class="text-2xl font-black text-slate-900 mb-1">Claude</h3>
+                                    <p class="text-sm font-semibold text-blue-700">Anthropic</p>
+                                </div>
+                            </div>
+                            <p class="text-base text-slate-700 font-semibold mb-3">AI for thoughtful analysis and coding</p>
+                            <div class="bg-white p-3 rounded-xl">
+                                <p class="text-sm font-bold text-slate-600 mb-1">Best For:</p>
+                                <p class="text-sm text-slate-700">Professional coding, writing, long document analysis, ethical AI use</p>
+                            </div>
+                        </div>
+
+                        <div class="card bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-2xl shadow-xl border-2 border-purple-200">
+                            <div class="flex items-start space-x-4 mb-4">
+                                <img src="gamma.jpeg" 
+                                     alt="Gamma AI Logo" 
+                                     class="w-20 h-20 rounded-xl border-2 border-purple-400 shadow-md object-cover">
+                                <div>
+                                    <h3 class="text-2xl font-black text-slate-900 mb-1">Gamma AI</h3>
+                                    <p class="text-sm font-semibold text-purple-700">Presentation Tool</p>
+                                </div>
+                            </div>
+                            <p class="text-base text-slate-700 font-semibold mb-3">AI tool for presentations and documents</p>
+                            <div class="bg-white p-3 rounded-xl">
+                                <p class="text-sm font-bold text-slate-600 mb-1">Best For:</p>
+                                <p class="text-sm text-slate-700">Fast, modern slide decks and reports without design skills</p>
+                            </div>
+                        </div>
+
+                        <div class="card bg-gradient-to-br from-orange-50 to-amber-50 p-6 rounded-2xl shadow-xl border-2 border-orange-200">
+                            <div class="flex items-start space-x-4 mb-4">
+                                <img src="popai.jpeg" 
+                                     alt="PopAI Logo" 
+                                     class="w-20 h-20 rounded-xl border-2 border-orange-400 shadow-md object-cover">
+                                <div>
+                                    <h3 class="text-2xl font-black text-slate-900 mb-1">PopAI</h3>
+                                    <p class="text-sm font-semibold text-orange-700">Document Converter</p>
+                                </div>
+                            </div>
+                            <p class="text-base text-slate-700 font-semibold mb-3">AI for presentations and PDFs</p>
+                            <div class="bg-white p-3 rounded-xl">
+                                <p class="text-sm font-bold text-slate-600 mb-1">Best For:</p>
+                                <p class="text-sm text-slate-700">Converting docs/PDFs to presentations, education, customization</p>
+                            </div>
+                        </div>
+
+                        <div class="card bg-gradient-to-br from-slate-50 to-zinc-100 p-6 rounded-2xl shadow-xl border-2 border-slate-300 col-span-2">
+                            <div class="flex items-start space-x-4 mb-4">
+                                <img src="palantir.jpeg" 
+                                     alt="Palantir AIP Logo" 
+                                     class="w-20 h-20 rounded-xl border-2 border-slate-400 shadow-md object-cover">
+                                <div>
+                                    <h3 class="text-2xl font-black text-slate-900 mb-1">Palantir AIP</h3>
+                                    <p class="text-sm font-semibold text-slate-700">Enterprise Platform</p>
+                                </div>
+                            </div>
+                            <p class="text-base text-slate-700 font-semibold mb-3">Enterprise-scale AI platform</p>
+                            <div class="bg-white p-3 rounded-xl">
+                                <p class="text-sm font-bold text-slate-600 mb-1">Best For:</p>
+                                <p class="text-sm text-slate-700">Large organizations, defense, healthcare, finance, and secure operations</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 10: Limitations of LLMs -->
+            <div :class="['slide', {active: currentSlide === 10}]">
+                <div class="max-w-6xl mx-auto w-full">
+                    <h2 class="text-5xl font-black text-slate-900 mb-3 text-shadow" style="letter-spacing: -0.03em;">
+                        What Are Hallucinations?
+                    </h2>
+                    <p class="text-xl text-slate-600 font-semibold mb-10">
+                        Hallucinations occur when an AI generates false or misleading information as if it were true.
+                    </p>
+
+                    <div class="bg-gradient-to-br from-red-50 via-orange-50 to-amber-50 p-10 rounded-3xl shadow-2xl border-4 border-red-200 mb-8">
+                        <div class="flex items-start space-x-6 mb-8">
+                            <div class="bg-white p-8 rounded-2xl shadow-xl">
+                                <i class="fas fa-exclamation-triangle text-red-500 text-7xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-4xl font-black text-slate-900 mb-4" style="letter-spacing: -0.02em;">Why Do They Happen?</h3>
+                                <p class="text-xl text-slate-700 font-semibold leading-relaxed">
+                                    Training rewards confident answers over admitting uncertainty, leading models to "guess" instead of saying "I don't know."
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="bg-white p-6 rounded-2xl shadow-lg">
+                                <img src="https://via.placeholder.com/450x200/fee2e2/ef4444?text=AI+Guess+vs+Uncertainty" 
+                                     alt="AI Guess vs AI Uncertainty" 
+                                     class="w-full h-48 object-cover rounded-xl border-2 border-red-300 hover:border-red-500 transition-all mb-3">
+                                <p class="text-sm font-bold text-slate-600 text-center">AI Guess vs AI Uncertainty</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-2xl shadow-lg">
+                                <img src="https://via.placeholder.com/450x200/fed7aa/f97316?text=Confident+Incorrect+Response" 
+                                     alt="Confident but Incorrect Responses" 
+                                     class="w-full h-48 object-cover rounded-xl border-2 border-orange-300 hover:border-orange-500 transition-all mb-3">
+                                <p class="text-sm font-bold text-slate-600 text-center">Chart: Confident but Incorrect Responses</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-red-500">
+                            <i class="fas fa-brain text-red-500 text-3xl mb-3"></i>
+                            <h4 class="text-lg font-bold text-slate-900 mb-2">Pattern Matching</h4>
+                            <p class="text-sm text-slate-600">Not true understanding or reasoning</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-orange-500">
+                            <i class="fas fa-question-circle text-orange-500 text-3xl mb-3"></i>
+                            <h4 class="text-lg font-bold text-slate-900 mb-2">No "I Don't Know"</h4>
+                            <p class="text-sm text-slate-600">Models prefer confident guesses</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-amber-500">
+                            <i class="fas fa-shield-alt text-amber-500 text-3xl mb-3"></i>
+                            <h4 class="text-lg font-bold text-slate-900 mb-2">Always Verify</h4>
+                            <p class="text-sm text-slate-600">Cross-check critical information</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 11: Demo -->
+            <div :class="['slide', {active: currentSlide === 11}]">
+                <div class="text-center max-w-5xl w-full">
                     <h2 class="text-6xl font-black gradient-text mb-12 text-shadow" style="letter-spacing: -0.03em;">
                         Live Demo
                     </h2>
@@ -368,8 +917,8 @@
                 </div>
             </div>
 
-            <!-- Slide 7: Privacy -->
-            <div :class="['slide', 'flex', 'flex-col', 'justify-center', {active: currentSlide === 7}]">
+            <!-- Slide 12: Privacy -->
+            <div :class="['slide', {active: currentSlide === 12}]">
                 <div class="max-w-5xl mx-auto w-full">
                     <h2 class="text-5xl font-black text-slate-900 mb-2 text-shadow" style="letter-spacing: -0.03em;">
                         Data Privacy & Guidelines
@@ -403,9 +952,9 @@
                 </div>
             </div>
 
-            <!-- Slide 8: Activity -->
-            <div :class="['slide', 'flex', 'flex-col', 'items-center', 'justify-center', {active: currentSlide === 8}]">
-                <div class="max-w-6xl mx-auto text-center">
+            <!-- Slide 13: Activity -->
+            <div :class="['slide', {active: currentSlide === 13}]">
+                <div class="max-w-6xl mx-auto text-center w-full">
                     <h2 class="text-6xl font-black gradient-text mb-12 text-shadow" style="letter-spacing: -0.03em;">
                         Hands-On Exercise
                     </h2>
@@ -434,9 +983,9 @@
                 </div>
             </div>
 
-            <!-- Slide 9: Thank You -->
-            <div :class="['slide', 'flex', 'flex-col', 'items-center', 'justify-center', {active: currentSlide === 9}]">
-                <div class="text-center">
+            <!-- Slide 14: Thank You -->
+            <div :class="['slide', {active: currentSlide === 14}]">
+                <div class="text-center w-full">
                     <h1 class="text-7xl font-black gradient-text mb-10 text-shadow" style="letter-spacing: -0.03em;">
                         Thank You!
                     </h1>
@@ -492,7 +1041,7 @@
             data() {
                 return {
                     currentSlide: 0,
-                    slides: Array(10).fill(null)
+                    slides: Array(15).fill(null)
                 }
             },
             methods: {
